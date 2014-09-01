@@ -10,7 +10,10 @@
 
     <!-- Bootstrap -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    
+    <link href="<%=request.getContextPath()%>/resources/bootstrap_datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet" >
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -67,26 +70,48 @@
 		    </div>
     	</div>
     	<div class="form-group">
-    		<label for="tbox_projectName" class="col-sm-2 control-label">计划开发时间</label>
-    		<div class="col-sm-1">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
+    		<label for="tbox_planDevDate" class="col-sm-2 control-label">计划开发时间</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_planDevDate" data-link-format="yyyy-mm-dd">
+                    <input id="tbox_planDevDate" class="form-control" type="text" value=""  />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input id="hf_planDevDate" type="hidden" value="" />
 		    </div>
-		    <label for="tbox_projectName" class="col-sm-1 control-label">计划验收时间</label>
-    		<div class="col-sm-1">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
+		    <label for="tbox_planAcceptDate" class="col-sm-2 control-label">计划验收时间</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_planAcceptDate" data-link-format="yyyy-mm-dd">
+                    <input id="tbox_planAcceptDate" class="form-control" type="text" value=""  />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input id="hf_planAcceptDate" type="hidden" value="" />
 		    </div>
-		    <label for="tbox_projectName" class="col-sm-2 control-label">实际开发时间</label>
-    		<div class="col-sm-1">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
-		    </div>
-		    <label for="tbox_projectName" class="col-sm-1 control-label">实际验收时间</label>
-    		<div class="col-sm-1">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
+    	</div>
+    	<div class="form-group">
+    		<label for="tbox_actualDevDate" class="col-sm-2 control-label">实际开发时间</label>
+    		<div class="col-sm-3">
+    			<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_actualDevDate" data-link-format="yyyy-mm-dd">
+                    <input id="tbox_actualDevDate" class="form-control" type="text" value=""  />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input id="hf_actualDevDate" type="hidden" value="" />
+            </div>
+		    <label for="tbox_actualAcceptDate" class="col-sm-2 control-label">实际验收时间</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_actualAcceptDate" data-link-format="yyyy-mm-dd">
+                    <input id="tbox_actualAcceptDate" class="form-control" type="text" value=""  />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <input id="hf_actualAcceptDate" type="hidden" value="" />
 		    </div>
     	</div>
     	<div class="form-group">
     		<label for="tbox_projectName" class="col-sm-2 control-label">开发架构</label>
-    		<div class="col-sm-3">
+    		<div class="col-sm-3 on-dialog">
+    			<div class="input-group">
+    				<input id="tbox_devTech" type="text" class="form-control" />
+    				<span data-toggle="modal" data-target="#modal_devTech" id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>
+    			</div>
 		    	<input type="text" class="form-control" id="tbox_projectName" />
 		    </div>
 		    <label for="tbox_projectName" class="col-sm-2 control-label">网络环境</label>
@@ -135,12 +160,84 @@
     </fieldset>
 	    <fieldset>
 			<legend>项目集成信息</legend>
-			
+			<div class="form-group">
+	    		<label for="tbox_projectName" class="col-sm-2 control-label">签名服务器</label>
+	    		<div class="col-sm-3">
+			    	<input type="text" class="form-control" id="tbox_projectName" />
+			    </div>
+			    <label for="tbox_projectName" class="col-sm-2 control-label">时间戳服务器</label>
+	    		<div class="col-sm-3">
+			    	<input type="text" class="form-control" id="tbox_projectName" />
+			    </div>
+    		</div>
+    		<div class="form-group">
+	    		<label for="tbox_projectName" class="col-sm-2 control-label">介质</label>
+	    		<div class="col-sm-3">
+			    	<input type="text" class="form-control" id="tbox_projectName" />
+			    </div>
+			    <label for="tbox_projectName" class="col-sm-2 control-label">签章</label>
+	    		<div class="col-sm-3">
+			    	<input type="text" class="form-control" id="tbox_projectName" />
+			    </div>
+    		</div>
 		</fieldset>	
     </form>
+    <!-- Dev framework dialog -->
+    <div id="modal_devTech" class="modal fade">
+    	<div class="modal-dialog">
+    		<div class="modal-content">
+				<div class="modal-header">
+    				<button type="button" class="close" data-dismiss="modal">
+    					<span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+    				</button>
+    				<h4 class="modal-title">系统架构</h4>
+				</div>
+				<div class="modal-body">
+					<div id="div_devTechValue" class="alert alert-success" role="alert"></div>
+					<div>
+						<div class="list-group">
+							<a href="#" class="list-group-item active">
+								<h4 class="list-group-item-heading">语言</h4>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="inlineCheckbox1" value="option1"> C#
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
+								</label>
+							</a>
+							<a href="#" class="list-group-item active">
+								<h4 class="list-group-item-heading">语言</h4>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="inlineCheckbox1" value="option1"> C#
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
+								</label>
+							</a>
+						</div>
+						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        			<button type="button" class="btn btn-primary">确定</button>
+				</div>
+    		</div><!-- modal content -->
+    	</div><!-- modal dialog -->
+    </div><!-- modal -->
+    
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/bootstrap_datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/bootstrap_datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="<%=request.getContextPath()%>/javascripts/addProject.js"></script>
   </body>
 </html>
