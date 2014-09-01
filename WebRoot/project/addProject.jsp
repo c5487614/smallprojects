@@ -110,7 +110,8 @@
     		<div class="col-sm-3 on-dialog">
     			<div class="input-group">
     				<input id="tbox_devTech" type="text" class="form-control" />
-    				<span data-toggle="modal" data-target="#modal_devTech" id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>
+    				<!--<span data-toggle="modal" data-target="#modal_devTech" id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>-->
+    				<span id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>
     			</div>
 		    	<input type="text" class="form-control" id="tbox_projectName" />
 		    </div>
@@ -190,38 +191,52 @@
     				<button type="button" class="close" data-dismiss="modal">
     					<span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
     				</button>
-    				<h4 class="modal-title">系统架构</h4>
+    				<h4 class="modal-title">开发架构</h4>
 				</div>
 				<div class="modal-body">
 					<div id="div_devTechValue" class="alert alert-success" role="alert"></div>
 					<div>
 						<div class="list-group">
-							<a href="#" class="list-group-item active">
-								<h4 class="list-group-item-heading">语言</h4>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> C#
-								</label>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
-								</label>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
-								</label>
-							</a>
-							<a href="#" class="list-group-item active">
-								<h4 class="list-group-item-heading">语言</h4>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> C#
-								</label>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
-								</label>
-								<label class="checkbox-inline">
-									<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
-								</label>
+							<a href="#" class="list-group-item">
+							    <h4 class="list-group-item-heading">语言</h4>
+							    <p class="list-group-item-text">
+							    	<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> C#
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> Java
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> Asp.Net
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> VB
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> Delphi
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> PHP
+									</label>
+							    </p>
 							</a>
 						</div>
-						
+						<div class="list-group">
+							<a href="#" class="list-group-item">
+							    <h4 class="list-group-item-heading">类型</h4>
+							    <p class="list-group-item-text">
+							    	<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> C/S
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> B/S
+									</label>
+									<label class="checkbox-inline">
+										<input type="checkbox" id="inlineCheckbox1" value="option1"> 混合
+									</label>
+							    </p>
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
