@@ -23,6 +23,8 @@ $(document).ready(function(){
 					createKeyManufactureDialog();
 				}else if("modal_sealType"==config.dialogId){
 					createSealTypeDialog();
+				}else if("modal_interface"==config.dialogId){
+					createInterfaceDialog();
 				}
 			}
 			$('#'+config.dialogId).modal('show');
@@ -36,6 +38,7 @@ $(document).ready(function(){
 	editFunc({'targetId': '#span_TSSServerType','dialogId':'modal_TSSServerType'});
 	editFunc({'targetId': '#span_keyManufacture','dialogId':'modal_keyManufacture'});
 	editFunc({'targetId': '#span_sealType','dialogId':'modal_sealType'});
+	editFunc({'targetId': '#span_interface','dialogId':'modal_interface'});
 });
 
 function initDatepicker(controlId){
@@ -75,9 +78,7 @@ var TmpListContent = '<div class="list-group">' +
 var TmpItem = '<label class="checkbox-inline"><input onclick="checkBoxFunc(this)" type="checkbox" value="{itemValue}"> {itemName}</label>';
 
 function editResult(dialogId,ctrlId,obj){
-	//{CtrlId:'tbox_',obj:this}
 	$('#'+ctrlId).val($(obj).parents('.modal-body').find('.alert-success').html());
-//	console.log($(obj).parents('.modal-body').find('.alert-success').html());
 	$('#'+dialogId).modal('hide');
 	
 }
@@ -268,6 +269,33 @@ function createSealTypeDialog(){
 		};
 	$(document.body).append(createDialog(config));
 }
+function createInterfaceDialog(){
+	var config = {
+		'dialogId' : 'modal_interface',
+		'ctrlId' : '',
+		'title' : '接口类型',
+		'okBtnClick' : function(){
+		},
+		'itemList' : [
+			{
+				'itemTitle' : 'SVS接口', 
+				'items' : [
+					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎17‎日 10:52:25 ', 'isInline':false},
+					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.8 ‎2014‎年‎5‎月‎22‎日 10:52:25 ', 'isInline':false},
+					{'itemName' : 'SVS_S_SDK_COM.dll 1.0.0.8 ‎2014‎年‎6月‎15‎日 11:52:25 ', 'isInline':false}
+				]
+			},
+			{
+				'itemTitle' : 'JIT接口', 
+				'items' : [
+					{'itemName' : 'JITClientCOMAPI.dll 2.0.23.20 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false},
+					{'itemName' : 'JITClientCOMAPI.dll 2.0.23.42 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false}
+				]
+			}
+		]
+	};
+	$(document.body).append(createDialog(config));
+}
 function createDialog(config){
 	var i,html;
 	var list = config.itemList;
@@ -288,5 +316,9 @@ function createDialogContent(config){
 	return TmpListContent.replace('{itemTitle}',config.itemTitle).replace('{itemList}',html);
 }
 function createDialogItemList(config){
-	return TmpItem.replace('{itemValue}',config.itemName).replace('{itemName}',config.itemName);
+	var tmp = TmpItem;
+	if(config.isInline==false){
+		tmp = tmp.replace('class="checkbox-inline"','');
+	}
+	return tmp.replace('{itemValue}',config.itemName).replace('{itemName}',config.itemName);
 }

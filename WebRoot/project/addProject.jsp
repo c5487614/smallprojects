@@ -201,26 +201,29 @@
     </fieldset>
 	    <fieldset>
 			<legend>项目集成信息</legend>
-			<table class="table table-hover">
-				<thead>
-					<th>接口库名称</th>
-					<th>版本号</th>
-					<th>代码签名时间</th>
-					<th>其他</th>
-					<th></th>
-				</thead>
-				<tbody>
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>
-							<button type="button" class="btn btn-link glyphicon glyphicon-plus"></button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="col-sm-2"></div>
+			<div class="col-sm-7">
+				<table class="table table-hover">
+					<thead>
+						<th>接口库名称</th>
+						<th>版本号</th>
+						<th>代码签名时间</th>
+						<th>其他</th>
+						<th></th>
+					</thead>
+					<tbody>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<button id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-plus"></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</fieldset>	
     </form>
     <!-- Dev framework dialog -->
