@@ -113,22 +113,30 @@
     				<!--<span data-toggle="modal" data-target="#modal_devTech" id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>-->
     				<span id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>
     			</div>
-		    	<input type="text" class="form-control" id="tbox_projectName" />
 		    </div>
 		    <label for="tbox_projectName" class="col-sm-2 control-label">网络环境</label>
     		<div class="col-sm-3">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
+		    	<div class="input-group">
+    				<input id="tbox_network" type="text" class="form-control" />
+    				<span id="span_networkEdit" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+    			</div>
 		    </div>
     	</div>
     	<div class="form-group">
-    		<label for="tbox_projectName" class="col-sm-2 control-label">服务端环境</label>
+    		<label for="tbox_serverE" class="col-sm-2 control-label">服务端环境</label>
     		<div class="col-sm-3">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
-		    </div>
-		    <label for="tbox_projectName" class="col-sm-2 control-label">客户端环境</label>
-    		<div class="col-sm-3">
-		    	<input type="text" class="form-control" id="tbox_projectName" />
-		    </div>
+	    		<div class="input-group">
+					<input id="tbox_serverE" type="text" class="form-control" />
+					<span id="span_serverEEdit" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+			</div>
+		    <label for="tbox_clientE" class="col-sm-2 control-label">客户端环境</label>
+		    <div class="col-sm-3">
+	    		<div class="input-group">
+					<input id="tbox_clientE" type="text" class="form-control" />
+					<span id="span_clientEEdit" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+			</div>
     	</div>
     	<div class="form-group">
     		<label for="tbox_projectName" class="col-sm-2 control-label">项目标识</label>
@@ -158,29 +166,61 @@
 		    	<input type="text" class="form-control" id="tbox_projectName" />
 		    </div>
     	</div>
+    	<div class="form-group">
+    		<label for="tbox_SVSServerType" class="col-sm-2 control-label">签名服务器</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group">
+					<input id="tbox_SVSServerType" type="text" class="form-control" />
+					<span id="span_SVSServerType" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+		    </div>
+		    <label for="tbox_TSSServerType" class="col-sm-2 control-label">时间戳服务器</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group">
+					<input id="tbox_TSSServerType" type="text" class="form-control" />
+					<span id="span_TSSServerType" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+		    </div>
+		</div>
+		<div class="form-group">
+    		<label for="tbox_keyManufacture" class="col-sm-2 control-label">介质</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group">
+					<input id="tbox_keyManufacture" type="text" class="form-control" />
+					<span id="span_keyManufacture" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+		    </div>
+		    <label for="tbox_sealType" class="col-sm-2 control-label">签章</label>
+    		<div class="col-sm-3">
+		    	<div class="input-group">
+					<input id="tbox_sealType" type="text" class="form-control" />
+					<span id="span_sealType" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+		    </div>
+		</div>
     </fieldset>
 	    <fieldset>
 			<legend>项目集成信息</legend>
-			<div class="form-group">
-	    		<label for="tbox_projectName" class="col-sm-2 control-label">签名服务器</label>
-	    		<div class="col-sm-3">
-			    	<input type="text" class="form-control" id="tbox_projectName" />
-			    </div>
-			    <label for="tbox_projectName" class="col-sm-2 control-label">时间戳服务器</label>
-	    		<div class="col-sm-3">
-			    	<input type="text" class="form-control" id="tbox_projectName" />
-			    </div>
-    		</div>
-    		<div class="form-group">
-	    		<label for="tbox_projectName" class="col-sm-2 control-label">介质</label>
-	    		<div class="col-sm-3">
-			    	<input type="text" class="form-control" id="tbox_projectName" />
-			    </div>
-			    <label for="tbox_projectName" class="col-sm-2 control-label">签章</label>
-	    		<div class="col-sm-3">
-			    	<input type="text" class="form-control" id="tbox_projectName" />
-			    </div>
-    		</div>
+			<table class="table table-hover">
+				<thead>
+					<th>接口库名称</th>
+					<th>版本号</th>
+					<th>代码签名时间</th>
+					<th>其他</th>
+					<th></th>
+				</thead>
+				<tbody>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<button type="button" class="btn btn-link glyphicon glyphicon-plus"></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</fieldset>	
     </form>
     <!-- Dev framework dialog -->
