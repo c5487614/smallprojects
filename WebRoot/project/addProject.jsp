@@ -201,28 +201,57 @@
     </fieldset>
 	    <fieldset>
 			<legend>项目集成信息</legend>
+			<div class="row">
+				<div class="col-sm-2"></div>
+				<!-- 集成接口表 -->
+				<div class="col-sm-7">
+					<table id="table_interface" class="table table-hover">
+						<thead>
+							<th class="col-sm-3">接口库名称</th>
+							<th class="col-sm-3">版本号</th>
+							<th class="col-sm-3">代码签名时间</th>
+							<th class="col-sm-3">其他</th>
+							<th class="col-sm-1"></th>
+						</thead>
+						<tbody>
+							<tr id="interfaceAct">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td>
+									<button id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-plus"></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- 集成方法表    -->
+			<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-7">
-				<table class="table table-hover">
+				<table id="table_interface" class="table table-hover">
 					<thead>
-						<th>接口库名称</th>
-						<th>版本号</th>
-						<th>代码签名时间</th>
-						<th>其他</th>
-						<th></th>
+						<th class="col-sm-3">实现功能</th>
+						<th class="col-sm-3">客户端调用接口</th>
+						<th class="col-sm-3">服务端调用接口</th>
+						<th class="col-sm-3">其他</th>
+						<th class="col-sm-1"></th>
 					</thead>
 					<tbody>
-						<tr>
+						<tr id="interfaceAct">
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>
-								<button id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-plus"></button>
+								<button id="span_functions" type="button" class="btn btn-link glyphicon glyphicon-plus"></button>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+			</div>
 			</div>
 		</fieldset>	
     </form>

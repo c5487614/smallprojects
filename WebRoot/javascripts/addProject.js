@@ -25,6 +25,8 @@ $(document).ready(function(){
 					createSealTypeDialog();
 				}else if("modal_interface"==config.dialogId){
 					createInterfaceDialog();
+				}else if("modal_functions"==config.dialogId){
+					//createInterfaceDialog();
 				}
 			}
 			$('#'+config.dialogId).modal('show');
@@ -39,6 +41,7 @@ $(document).ready(function(){
 	editFunc({'targetId': '#span_keyManufacture','dialogId':'modal_keyManufacture'});
 	editFunc({'targetId': '#span_sealType','dialogId':'modal_sealType'});
 	editFunc({'targetId': '#span_interface','dialogId':'modal_interface'});
+	editFunc({'targetId': '#span_functions','dialogId':'modal_functions'});
 });
 
 function initDatepicker(controlId){
@@ -274,15 +277,14 @@ function createInterfaceDialog(){
 		'dialogId' : 'modal_interface',
 		'ctrlId' : '',
 		'title' : '接口类型',
-		'okBtnClick' : function(){
-		},
+		'okBtnClick' : 'interfaceClick(this);',
 		'itemList' : [
 			{
 				'itemTitle' : 'SVS接口', 
 				'items' : [
-					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎17‎日 10:52:25 ', 'isInline':false},
-					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.8 ‎2014‎年‎5‎月‎22‎日 10:52:25 ', 'isInline':false},
-					{'itemName' : 'SVS_S_SDK_COM.dll 1.0.0.8 ‎2014‎年‎6月‎15‎日 11:52:25 ', 'isInline':false}
+					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎17‎日 10:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.1|‎2014‎年‎4‎月‎17‎日 10:52:25|' , 'isInline':false},
+					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.8 ‎2014‎年‎5‎月‎22‎日 10:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.6|‎2014‎年‎4‎月‎17‎日 10:52:25|' ,'isInline':false},
+					{'itemName' : 'SVS_S_SDK_COM.dll 1.0.0.8 ‎2014‎年‎6月‎15‎日 11:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.8|‎‎2014‎年‎6月‎15‎日 11:52:25|' ,'isInline':false}
 				]
 			},
 			{
@@ -296,6 +298,50 @@ function createInterfaceDialog(){
 	};
 	$(document.body).append(createDialog(config));
 }
+function createFunctionsDialog(){
+	var config = {
+			'dialogId' : 'modal_functions',
+			'ctrlId' : '',
+			'title' : '集成接口',
+			'okBtnClick' : 'interfaceClick(this);',
+			'itemList' : [
+				{
+					'itemTitle' : 'SVS_C_SDK_COM.DLL', 
+					'items' : [
+						{'itemName' : 'SOF_SetP7SignMode'},
+						{'itemName' : 'SOF_VerifyAttachSigned'},
+						{'itemName' : 'SOF_SignDataByP7'},
+						{'itemName' : 'SOF_Base64Encode'}
+					]
+				},
+				{
+					'itemTitle' : 'SVS_C_SDK_COM.DLL', 
+					'items' : [
+						{'itemName' : 'JITClientCOMAPI.dll 2.0.23.20 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false},
+						{'itemName' : 'JITClientCOMAPI.dll 2.0.23.42 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false}
+					]
+				}
+			]
+		};
+		$(document.body).append(createDialog(config));
+}
+function interfaceClick(obj){
+	var value = $(obj).parents('.modal-content').find('.alert-success').html();
+	var values = value.split('|');
+	var interfaceUsed = {
+			'name' : values[0],
+			'version' : values[1],
+			'signDate' : values[2],
+			'comment' : values[3]
+	};
+	var html = '<tr><td>{name}</td><td>{version}</td><td>{signDate}</td><td>{comment}</td><td><button onclick="removeInterface(this)" id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-minus"></button></td></tr>';
+	html = html.replace('{name}', interfaceUsed.name).replace('{version}',interfaceUsed.version).replace('{signDate}',interfaceUsed.signDate).replace('{comment}',interfaceUsed.comment);
+	$('#interfaceAct').before(html);
+	$(obj).parents('.modal').modal('hide');
+}
+function removeInterface(obj){
+	$(obj).parent().parent().remove();
+}
 function createDialog(config){
 	var i,html;
 	var list = config.itemList;
@@ -303,7 +349,11 @@ function createDialog(config){
 	for(i=0;i<list.length;i++){
 		html = html + createDialogContent(list[i]);
 	}
-	return TmpDialogContent.replace('{title}',config.title).replace('{dialogId}',config.dialogId).replace('{content}',html).replace('{btnClick}','editResult(\''+config.dialogId+'\',\''+config.ctrlId+'\',this)');
+	var tmp = TmpDialogContent;
+	if(config.okBtnClick){
+		tmp = tmp.replace('{btnClick}', config.okBtnClick);
+	}
+	return tmp.replace('{title}',config.title).replace('{dialogId}',config.dialogId).replace('{content}',html).replace('{btnClick}','editResult(\''+config.dialogId+'\',\''+config.ctrlId+'\',this)');
 }
 function createDialogContent(config){
 	var list = config.itemList;
@@ -320,5 +370,6 @@ function createDialogItemList(config){
 	if(config.isInline==false){
 		tmp = tmp.replace('class="checkbox-inline"','');
 	}
-	return tmp.replace('{itemValue}',config.itemName).replace('{itemName}',config.itemName);
+	//if itemValue is not defined, use itemName
+	return tmp.replace('{itemValue}',config.itemValue||config.itemName).replace('{itemName}',config.itemName);
 }
