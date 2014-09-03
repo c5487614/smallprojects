@@ -231,7 +231,7 @@
 			<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-7">
-				<table id="table_interface" class="table table-hover">
+				<table id="table_functions" class="table table-hover">
 					<thead>
 						<th class="col-sm-3">实现功能</th>
 						<th class="col-sm-3">客户端调用接口</th>
@@ -240,7 +240,7 @@
 						<th class="col-sm-1"></th>
 					</thead>
 					<tbody>
-						<tr id="interfaceAct">
+						<tr id="functionAct">
 							<td></td>
 							<td></td>
 							<td></td>

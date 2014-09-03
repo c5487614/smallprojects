@@ -26,7 +26,7 @@ $(document).ready(function(){
 				}else if("modal_interface"==config.dialogId){
 					createInterfaceDialog();
 				}else if("modal_functions"==config.dialogId){
-					//createInterfaceDialog();
+					createFunctionsDialog();
 				}
 			}
 			$('#'+config.dialogId).modal('show');
@@ -52,7 +52,7 @@ function initDatepicker(controlId){
         pickTime: false,
         startView: 2,
 		minView: 2,
-		language:  'zh-CN'
+		language: 'zh-CN'
 	});
 }
 var TmpDialogContent = '<div id="{dialogId}" class="modal fade">' +  
@@ -78,7 +78,7 @@ var TmpListContent = '<div class="list-group">' +
 							'<p class="list-group-item-text">{itemList}</p>' + 
 						'</a>'
 				    '</div>';
-var TmpItem = '<label class="checkbox-inline"><input onclick="checkBoxFunc(this)" type="checkbox" value="{itemValue}"> {itemName}</label>';
+var TmpItem = '<label class="checkbox-inline"><input onclick="{itemClick}" type="checkbox" value="{itemValue}"> {itemName}</label>';
 
 function editResult(dialogId,ctrlId,obj){
 	$('#'+ctrlId).val($(obj).parents('.modal-body').find('.alert-success').html());
@@ -101,6 +101,35 @@ function checkBoxFunc(obj){
 		result = result.substring(1, result.length);
 	}
 	resultContent.html(result);
+}
+//result init value is different with checkBoxFunc
+function checkBoxFunc1(obj){
+	
+	var cbs = $(obj).parents('.modal-body').find('input[type="checkbox"]');
+	var resultContent = $(obj).parents('.modal-body').find('.alert-success');
+	var i,result;
+	var j = 0;
+	
+	var list = $(obj).parents('.modal-body').find('.list-group-item-text');
+	var result1 = '';
+	for(i=0;i<list.size();i++){
+		var cbs1 = $(list[i]).find('input[type="checkbox"]');
+		console.log(list[i]);
+		result = '';
+		for(j=0;j<cbs1.size();j++){
+			var item = $(cbs1[j]);
+			if(item.is(':checked')==true || item.is(':checked')=='true'){
+				result = result + ', ' + item.attr('value');
+			}
+		}
+		if(result[0]==','){
+			result = result.substring(1, result.length);
+		}
+		result = '|' + result;
+		result1 = result1 + result;
+		console.log(result);
+	}
+	resultContent.html(result1);
 }
 function createDevTechDialog(){
 	var config = {
@@ -303,22 +332,33 @@ function createFunctionsDialog(){
 			'dialogId' : 'modal_functions',
 			'ctrlId' : '',
 			'title' : '集成接口',
-			'okBtnClick' : 'interfaceClick(this);',
+			'okBtnClick' : 'functionsClick(this);',
 			'itemList' : [
 				{
-					'itemTitle' : 'SVS_C_SDK_COM.DLL', 
+					'itemTitle' : '功能', 
 					'items' : [
-						{'itemName' : 'SOF_SetP7SignMode'},
-						{'itemName' : 'SOF_VerifyAttachSigned'},
-						{'itemName' : 'SOF_SignDataByP7'},
-						{'itemName' : 'SOF_Base64Encode'}
+						{'itemName' : '登陆', 'itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : '签名验签', 'itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : '加解密', 'itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : '签章', 'itemFunc' : 'checkBoxFunc1(this)'}
 					]
 				},
 				{
 					'itemTitle' : 'SVS_C_SDK_COM.DLL', 
 					'items' : [
-						{'itemName' : 'JITClientCOMAPI.dll 2.0.23.20 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false},
-						{'itemName' : 'JITClientCOMAPI.dll 2.0.23.42 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false}
+						{'itemName' : 'SOF_SetP7SignMode', 'itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : 'SOF_VerifyAttachSigned','itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : 'SOF_SignDataByP7','itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : 'SOF_Base64Encode','itemFunc' : 'checkBoxFunc1(this)'}
+					]
+				},
+				{
+					'itemTitle' : 'SVS_S_SDK_COM.DLL', 
+					'items' : [
+						{'itemName' : 'SOF_SetP7SignMode','itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : 'SOF_VerifyAttachSigned','itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : 'SOF_SignDataByP7','itemFunc' : 'checkBoxFunc1(this)'},
+						{'itemName' : 'SOF_Base64Encode','itemFunc' : 'checkBoxFunc1(this)'}
 					]
 				}
 			]
@@ -370,6 +410,11 @@ function createDialogItemList(config){
 	if(config.isInline==false){
 		tmp = tmp.replace('class="checkbox-inline"','');
 	}
+	var itemFunc = 'checkBoxFunc(this)';
+	if(config.itemFunc){
+		itemFunc = config.itemFunc;
+	}
+	tmp = tmp.replace('{itemClick}',itemFunc);
 	//if itemValue is not defined, use itemName
 	return tmp.replace('{itemValue}',config.itemValue||config.itemName).replace('{itemName}',config.itemName);
 }
