@@ -25,6 +25,9 @@
     <jsp:include page="/header.jsp" />
     
     <form id="formProject" class="form-horizontal" role="form">
+    <input type="hidden" name="hf_projectId" id="hf_functions" value="" />
+    <input type="hidden" name="hf_functions" id="hf_functions" value="" />
+    <input type="hidden" name="hf_interfaces" id="hf_interfaces" value="" />
     <fieldset>
 		<legend>项目基本信息</legend>
     	<div class="form-group">
@@ -76,7 +79,7 @@
                     <input name="tbox_planDevDate" id="tbox_planDevDate" class="form-control" type="text" value=""  />
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
-                <input name="tbox_planDevDate" id="hf_planDevDate" type="hidden" value="" />
+                <input id="hf_planDevDate" type="hidden" value="" />
 		    </div>
 		    <label for="tbox_planAcceptDate" class="col-sm-2 control-label">计划验收时间</label>
     		<div class="col-sm-3">
@@ -84,7 +87,7 @@
                     <input name="tbox_planAcceptDate" id="tbox_planAcceptDate" class="form-control" type="text" value=""  />
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
-                <input name="hf_planAcceptDate" id="hf_planAcceptDate" type="hidden" value="" />
+                <input id="hf_planAcceptDate" type="hidden" value="" />
 		    </div>
     	</div>
     	<div class="form-group">
@@ -94,7 +97,7 @@
                     <input name="tbox_actualDevDate" id="tbox_actualDevDate" class="form-control" type="text" value=""  />
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
-                <input name="hf_actualDevDate" id="hf_actualDevDate" type="hidden" value="" />
+                <input id="hf_actualDevDate" type="hidden" value="" />
             </div>
 		    <label for="tbox_actualAcceptDate" class="col-sm-2 control-label">实际验收时间</label>
     		<div class="col-sm-3">
@@ -102,7 +105,7 @@
                     <input name="tbox_actualAcceptDate" id="tbox_actualAcceptDate" class="form-control" type="text" value=""  />
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
-                <input name="hf_actualAcceptDate" id="hf_actualAcceptDate" type="hidden" value="" />
+                <input  id="hf_actualAcceptDate" type="hidden" value="" />
 		    </div>
     	</div>
     	<div class="form-group">
@@ -151,12 +154,12 @@
 		    <div class="col-sm-1"></div>
     		<div class="col-sm-1">
 		    	<label>
-				    <input name="tbox_increaseIssue" type="checkbox" value="">增发标识
+				    <input name="tbox_increaseIssue" type="checkbox" value="1">增发标识
 				</label>
 		    </div>
 		    <div class="col-sm-1">
 		    	<label>
-				    <input name="tbox_keepEncryptKey" type="checkbox" value="">保持原有密钥
+				    <input name="tbox_keepEncryptKey" type="checkbox" value="1">保持原有密钥
 				</label>
 		    </div>
     	</div>
@@ -193,11 +196,20 @@
 		    <label for="tbox_sealType" class="col-sm-2 control-label">签章</label>
     		<div class="col-sm-3">
 		    	<div class="input-group">
-					<input name="tbox_keyManufacture" id="tbox_sealType" type="text" class="form-control" />
+					<input name="tbox_sealType" id="tbox_sealType" type="text" class="form-control" />
 					<span id="span_sealType" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 		    </div>
 		</div>
+		<div class="form-group">
+    		<label for="tbox_functionNeededIntegrate" class="col-sm-2 control-label">集成功能</label>
+    		<div class="col-sm-8">
+    			<div class="input-group">
+					<input name="tbox_functionNeededIntegrate" id="tbox_functionNeededIntegrate" type="text" class="form-control" />
+					<span id="span_functionNeededIntegrate" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
+				</div>
+		    </div>
+    	</div>
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-1"></div>

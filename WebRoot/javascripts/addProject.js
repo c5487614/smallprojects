@@ -43,6 +43,9 @@ $(document).ready(function(){
 	editFunc({'targetId': '#span_interface','dialogId':'modal_interface'});
 	editFunc({'targetId': '#span_functions','dialogId':'modal_functions'});
 	
+	$.ajaxSetup({
+		accepts : 'application/json'
+	});
 	$("#btn_storeBasic").click(storeData);
 });
 
@@ -417,17 +420,17 @@ function interfaceClick(obj){
 	$('#interfaceAct').before(html);
 	$(obj).parents('.modal').modal('hide');
 }
-function functionsUse(obj){
+function functionsClick(obj){
 	var value = $(obj).parents('.modal-content').find('.alert-success').html();
 	var values = value.split('|');
 	var functionUsed = {
-		'point' : values[0],
-		'clientFunc' : values[1],
-		'serverFunc' : values[2],
-		'comment' : values[3]
+		'point' : values[1],
+		'clientFunc' : values[2],
+		'serverFunc' : values[3],
+		'comment' : values[4]
 	}
 	var html = '<tr><td>{point}</td><td>{clientFunc}</td><td>{serverFunc}</td><td>{comment}</td><td><button onclick="removeInterface(this)" id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-minus"></button></td></tr>';
-	html = html.replace('{point}', interfaceUsed.name).replace('{serverFunc}',interfaceUsed.version).replace('{clientFunc}',interfaceUsed.signDate).replace('{comment}',interfaceUsed.comment);
+	html = html.replace('{point}', functionUsed.point).replace('{clientFunc}',functionUsed.clientFunc).replace('{serverFunc}',functionUsed.serverFunc).replace('{comment}',functionUsed.comment);
 	$('#functionAct').before(html);
 	$(obj).parents('.modal').modal('hide');
 }
@@ -473,11 +476,11 @@ function createDialogItemList(config){
 function storeData(){
 	$.ajax({
 		type : 'POST',
-		url : 'test',
+		url : 'save.do',
 		data : $('#formProject').serialize(),
 		cache : false,
-		success : function(){
-			alert('success');
+		success : function(data,textStatus,jqXHR){
+			alert(data);
 		},
 		error : function(){
 			alert('failed');
