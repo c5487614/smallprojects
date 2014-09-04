@@ -42,6 +42,8 @@ $(document).ready(function(){
 	editFunc({'targetId': '#span_sealType','dialogId':'modal_sealType'});
 	editFunc({'targetId': '#span_interface','dialogId':'modal_interface'});
 	editFunc({'targetId': '#span_functions','dialogId':'modal_functions'});
+	
+	$("#btn_storeBasic").click(storeData);
 });
 
 function initDatepicker(controlId){
@@ -333,37 +335,73 @@ function createFunctionsDialog(){
 			'ctrlId' : '',
 			'title' : '集成接口',
 			'okBtnClick' : 'functionsClick(this);',
-			'itemList' : [
-				{
-					'itemTitle' : '功能', 
-					'items' : [
-						{'itemName' : '登陆', 'itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : '签名验签', 'itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : '加解密', 'itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : '签章', 'itemFunc' : 'checkBoxFunc1(this)'}
-					]
-				},
-				{
-					'itemTitle' : 'SVS_C_SDK_COM.DLL', 
-					'items' : [
-						{'itemName' : 'SOF_SetP7SignMode', 'itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : 'SOF_VerifyAttachSigned','itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : 'SOF_SignDataByP7','itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : 'SOF_Base64Encode','itemFunc' : 'checkBoxFunc1(this)'}
-					]
-				},
-				{
-					'itemTitle' : 'SVS_S_SDK_COM.DLL', 
-					'items' : [
-						{'itemName' : 'SOF_SetP7SignMode','itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : 'SOF_VerifyAttachSigned','itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : 'SOF_SignDataByP7','itemFunc' : 'checkBoxFunc1(this)'},
-						{'itemName' : 'SOF_Base64Encode','itemFunc' : 'checkBoxFunc1(this)'}
-					]
-				}
+			'tabHeads' : [
+              {'href':'point','tabName':'功能','headClass':'active'},
+              {'href':'clientFunc','tabName':'客户端方法'},
+              {'href':'serverFunc','tabName':'服务端方法'},
+              {'href':'others','tabName':'其他'}
+			],
+			'tabItems' : [
+              {
+            	  'tabItemClass':'tab-pane active',
+            	  'tabItemId':'point',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'功能',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'登陆','itemName':'登陆'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'签名验签','itemName':'签名验签'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'时间戳','itemName':'时间戳'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'签章','itemName':'签章'}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'clientFunc',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'SVS_C_SDK_COM.DLL',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'serverFunc',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'SVS_S_SDK_COM.DLL',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'others',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'备注',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'无','itemValue':'无'}
+    	    	            ]
+            	       }
+	               ]
+              }
 			]
 		};
-		$(document.body).append(createDialog(config));
+		$(document.body).append(tabConstructor.init(config));
 }
 function interfaceClick(obj){
 	var value = $(obj).parents('.modal-content').find('.alert-success').html();
@@ -377,6 +415,20 @@ function interfaceClick(obj){
 	var html = '<tr><td>{name}</td><td>{version}</td><td>{signDate}</td><td>{comment}</td><td><button onclick="removeInterface(this)" id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-minus"></button></td></tr>';
 	html = html.replace('{name}', interfaceUsed.name).replace('{version}',interfaceUsed.version).replace('{signDate}',interfaceUsed.signDate).replace('{comment}',interfaceUsed.comment);
 	$('#interfaceAct').before(html);
+	$(obj).parents('.modal').modal('hide');
+}
+function functionsUse(obj){
+	var value = $(obj).parents('.modal-content').find('.alert-success').html();
+	var values = value.split('|');
+	var functionUsed = {
+		'point' : values[0],
+		'clientFunc' : values[1],
+		'serverFunc' : values[2],
+		'comment' : values[3]
+	}
+	var html = '<tr><td>{point}</td><td>{clientFunc}</td><td>{serverFunc}</td><td>{comment}</td><td><button onclick="removeInterface(this)" id="span_interface" type="button" class="btn btn-link glyphicon glyphicon-minus"></button></td></tr>';
+	html = html.replace('{point}', interfaceUsed.name).replace('{serverFunc}',interfaceUsed.version).replace('{clientFunc}',interfaceUsed.signDate).replace('{comment}',interfaceUsed.comment);
+	$('#functionAct').before(html);
 	$(obj).parents('.modal').modal('hide');
 }
 function removeInterface(obj){
@@ -417,4 +469,18 @@ function createDialogItemList(config){
 	tmp = tmp.replace('{itemClick}',itemFunc);
 	//if itemValue is not defined, use itemName
 	return tmp.replace('{itemValue}',config.itemValue||config.itemName).replace('{itemName}',config.itemName);
+}
+function storeData(){
+	$.ajax({
+		type : 'POST',
+		url : 'test',
+		data : $('#formProject').serialize(),
+		cache : false,
+		success : function(){
+			alert('success');
+		},
+		error : function(){
+			alert('failed');
+		}
+	});
 }
