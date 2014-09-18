@@ -28,6 +28,9 @@
 		<property name="password" value="${jdbc.password}" />  
     </bean> 
 	-->
+	<context:annotation-config />
+	<context:component-scan base-package="cn.org.hbca.project.service.imp" />
+	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">  
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
 		<property name="url" value="jdbc:mysql://localhost:3306/hbcatestdb" />  
@@ -38,7 +41,8 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="cn.org.hbca.project.model" />
 	</bean>
+	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-  		<property name="basePackage" value="cn.org.hbca.project.xml" />
+  		<property name="basePackage" value="cn.org.hbca.project.dao" />
 	</bean>
 </beans>

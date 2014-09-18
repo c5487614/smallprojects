@@ -3,17 +3,22 @@ package cn.org.hbca.project.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.org.hbca.project.MyApplicationContext;
 import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
+import cn.org.hbca.project.service.imp.ProjectService;
 
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
+	@Autowired
+	ProjectService projectService;
 	@RequestMapping(value = "/hello.do")
     public @ResponseBody String hello() {
 		return "{result:'测试ABC'}";
@@ -86,7 +91,9 @@ public class ProjectController {
 		model.setServerEnvironment(tbox_serverE);
 		model.setSVSServerType(tbox_SVSServerType);
 		model.setTSSServerType(tbox_TSSServerType);
+		//MyApplicationContext.getContext()
 		
+		projectService.insert(model);
 		return "{result:'测试ABC'}";
     }
 }

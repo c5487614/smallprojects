@@ -15,6 +15,7 @@
     <context:annotation-config />
 	<context:component-scan base-package="cn.org.hbca.project.controller" />
 	
+	
 	<mvc:annotation-driven>
 		<mvc:message-converters>
 			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
