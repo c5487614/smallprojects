@@ -23,6 +23,7 @@ public class ProjectService implements IProjectService {
 	@Override
 	public boolean select() {
 		// TODO Auto-generated method stub
+		projectMapper.selectByPrimaryKey("123");
 		return false;
 	}
 	@Override

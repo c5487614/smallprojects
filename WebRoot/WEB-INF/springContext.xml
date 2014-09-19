@@ -29,7 +29,7 @@
     </bean> 
 	-->
 	<context:annotation-config />
-	<context:component-scan base-package="cn.org.hbca.project.service.imp" />
+	<context:component-scan base-package="cn.org.hbca.project" />
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"  destroy-method="close">  
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />  
@@ -37,11 +37,14 @@
 		<property name="username" value="root" />  
 		<property name="password" value="CCH" />  
     </bean> 
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="cn.org.hbca.project.model" />
 	</bean>
-	
+
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
   		<property name="basePackage" value="cn.org.hbca.project.dao" />
 	</bean>

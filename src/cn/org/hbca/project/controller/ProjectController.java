@@ -92,8 +92,8 @@ public class ProjectController {
 		model.setSVSServerType(tbox_SVSServerType);
 		model.setTSSServerType(tbox_TSSServerType);
 		//MyApplicationContext.getContext()
-		
 		projectService.insert(model);
+		
 		return "{result:'测试ABC'}";
     }
 }
