@@ -57,7 +57,6 @@ public class ProjectController {
     		@RequestParam("tbox_serverE") String tbox_serverE
     		) throws UnsupportedEncodingException {
 		ProjectinfoWithBLOBs model = new ProjectinfoWithBLOBs();
-		System.out.println(tbox_actualAcceptDate);
 		model.setActualAcceptDate(tbox_actualAcceptDate);
 		model.setActualDevStartDate(tbox_actualDevDate);
 		model.setClientEnvironment(tbox_clientE);
@@ -84,14 +83,16 @@ public class ProjectController {
 		model.setPlanAcceptDate(tbox_planAcceptDate);
 		model.setPlanDevStartDate(tbox_planDevDate);
 		model.setProjectCode(tbox_projectCdoe);
-		model.setProjectId(hf_projectId);
+		model.setProjectId(hf_projectId);//
+		if(model.getProjectId().equals("")){
+			model.setProjectId(java.util.UUID.randomUUID().toString());
+		}
 		model.setProjectManager(tbox_projectManager);
 		model.setProjectName(tbox_projectName);
 		model.setSealType(tbox_sealType);
 		model.setServerEnvironment(tbox_serverE);
 		model.setSVSServerType(tbox_SVSServerType);
 		model.setTSSServerType(tbox_TSSServerType);
-		//MyApplicationContext.getContext()
 		projectService.insert(model);
 		
 		return "{result:'测试ABC'}";
