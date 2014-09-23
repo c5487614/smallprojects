@@ -1,20 +1,32 @@
 $(document).ready(function(){
-	$("#nav_firstPage").click(function(){
+	$.ajax({
+		type : 'POST',
+		url : 'getTop50.do',
+		success : function(data,textStatus,jqXHR){
+			initIndex(data.items);
+		},
+		error : function(){
+			alert('failed');
+		}
+	});
+});
+function initIndex(itemList){
+	$(itemList).each(function(){
+		var obj = this;
 		getProjectTpl({
 			items:[
-				{value:'项目名称：项目1',itemStyle:'label-primary glyphicon glyphicon-bookmark'},
-				{value:'项目经理：项目经理'},
-				{value:'项目集成商：'},
-				{value:'介质类型：'},
-				{value:'签名服务器：'},
-				{value:'时间戳服务器：'},
-				{value:'签章类型：'},
-				{value:'项目进度：', itemStyle:'label-warning'}
+			    {value:'项目名称：' + obj.projectName,itemStyle:'label-primary glyphicon glyphicon-bookmark'},
+				{value:'项目经理：'+ obj.projectManager},
+				{value:'项目集成商：' + obj.manufacturerName},
+				{value:'介质类型：' + obj.keyManufacture},
+				{value:'签名服务器：' + obj.svsserverType},
+				{value:'时间戳服务器：' + obj.tssserverType},
+				{value:'签章类型：' + obj.sealType},
+				{value:'项目进度：' + obj.sealType, itemStyle:'label-warning'}
 			]
-		});
-	})
-});
-
+		})
+	});
+}
 
 function getProjectTpl(data){
 	var styleMargin = 'margin-bottom:0px';

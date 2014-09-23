@@ -2,6 +2,9 @@ package cn.org.hbca.project.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.org.hbca.project.MyApplicationContext;
 import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
 import cn.org.hbca.project.service.imp.ProjectService;
 
@@ -97,4 +99,12 @@ public class ProjectController {
 		
 		return "{result:'测试ABC'}";
     }
+	@RequestMapping(value = "/getTop50.do")
+	public @ResponseBody Map<String,Object> getTop50(){
+		List<ProjectinfoWithBLOBs> list = projectService.selectTop50();
+		Map<String,Object> map =  new HashMap<String,Object>();
+		map.put("length", list.size());
+		map.put("items", list);
+		return map;
+	}
 }
