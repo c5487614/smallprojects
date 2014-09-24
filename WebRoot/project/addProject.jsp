@@ -1,12 +1,14 @@
 <%@ page language="java" import="java.util.*,java.net.URL" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="cn.org.hbca.project.model.ProjectinfoWithBLOBs"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>add project</title>
+    <title>项目详情</title>
 
     <!-- Bootstrap -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +35,8 @@
     	<div class="form-group">
     		<label for="tbox_projectName" class="col-sm-2 control-label">项目名称</label>
     		<div class="col-sm-3">
-		    	<input name="tbox_projectName" type="text" class="form-control" id="tbox_projectName" />
+		    	<input name="tbox_projectName" type="text" class="form-control" id="tbox_projectName"
+		    	value="<c:out value="${project.projectName}"/>" />
 		    </div>
 		    <label for="tbox_projectManager" class="col-sm-2 control-label">项目经理</label>
     		<div class="col-sm-3">
@@ -47,36 +50,43 @@
     	<div class="form-group">
     		<label for="tbox_projectName" class="col-sm-2 control-label">集成系统名称</label>
     		<div class="col-sm-3">
-		    	<input name="tbox_MProjectName" type="text" class="form-control" id="tbox_MProjectName" />
+		    	<input name="tbox_MProjectName" type="text" class="form-control" id="tbox_MProjectName" 
+		    	value="<c:out value="${project.manufacturerProjectName}"/>" />
 		    </div>
 		    <label for="tbox_manufactureName" class="col-sm-2 control-label">系统开发商名称</label>
     		<div class="col-sm-3">
-		    	<input name="tbox_manufactureName" type="text" class="form-control" id="tbox_manufactureName" />
+		    	<input name="tbox_manufactureName" type="text" class="form-control" id="tbox_manufactureName"
+		    	value="<c:out value="${project.manufacturerName}"/>" />
 		    </div>
     	</div>
     	<div class="form-group">
     		<label for="tbox_MProjectManager" class="col-sm-2 control-label">项目负责人(开发商)</label>
     		<div class="col-sm-1">
-		    	<input name="tbox_MProjectManager" type="text" class="form-control" id="tbox_MProjectManager" />
+		    	<input name="tbox_MProjectManager" type="text" class="form-control" id="tbox_MProjectManager" 
+				value="<c:out value="${project.manufacturerProjectManager}"/>" />
 		    </div>
 		    <label for="tbox_MPMContact" class="col-sm-1 control-label">联系方式</label>
     		<div class="col-sm-1">
-		    	<input name="tbox_MPMContact" type="text" class="form-control" id="tbox_MPMContact" />
+		    	<input name="tbox_MPMContact" type="text" class="form-control" id="tbox_MPMContact" 
+				value="<c:out value="${project.MPMContact}"/>" />
 		    </div>
 		    <label for="tbox_MProjectDev" class="col-sm-2 control-label">研发负责人(开发商)</label>
     		<div class="col-sm-1">
-		    	<input name="tbox_MProjectDev" type="text" class="form-control" id="tbox_MProjectDev" />
+		    	<input name="tbox_MProjectDev" type="text" class="form-control" id="tbox_MProjectDev" 
+		    	value="<c:out value="${project.manufacturerProjectDeveloper}"/>" />
 		    </div>
 		    <label for="tbox_MPDContact" class="col-sm-1 control-label">联系方式</label>
     		<div class="col-sm-1">
-		    	<input name="tbox_MPDContact" type="text" class="form-control" id="tbox_MPDContact" />
+		    	<input name="tbox_MPDContact" type="text" class="form-control" id="tbox_MPDContact" 
+		    	value="<c:out value="${project.MPDContact}"/>" />
 		    </div>
     	</div>
     	<div class="form-group">
     		<label for="tbox_planDevDate" class="col-sm-2 control-label">计划开发时间</label>
     		<div class="col-sm-3">
 		    	<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_planDevDate" data-link-format="yyyy-mm-dd">
-                    <input name="tbox_planDevDate" id="tbox_planDevDate" class="form-control" type="text" value=""  />
+                    <input name="tbox_planDevDate" id="tbox_planDevDate" class="form-control" type="text" 
+                    value="<fmt:formatDate pattern="yyyy-MM-dd" value="${project.planDevStartDate}"/>"/>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
                 <input id="hf_planDevDate" type="hidden" value="" />
@@ -84,7 +94,8 @@
 		    <label for="tbox_planAcceptDate" class="col-sm-2 control-label">计划验收时间</label>
     		<div class="col-sm-3">
 		    	<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_planAcceptDate" data-link-format="yyyy-mm-dd">
-                    <input name="tbox_planAcceptDate" id="tbox_planAcceptDate" class="form-control" type="text" value=""  />
+                    <input name="tbox_planAcceptDate" id="tbox_planAcceptDate" class="form-control" type="text" 
+                    value="<fmt:formatDate pattern="yyyy-MM-dd" value="${project.planAcceptDate}"/>"/>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
                 <input id="hf_planAcceptDate" type="hidden" value="" />
@@ -94,7 +105,8 @@
     		<label for="tbox_actualDevDate" class="col-sm-2 control-label">实际开发时间</label>
     		<div class="col-sm-3">
     			<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_actualDevDate" data-link-format="yyyy-mm-dd">
-                    <input name="tbox_actualDevDate" id="tbox_actualDevDate" class="form-control" type="text" value=""  />
+                    <input name="tbox_actualDevDate" id="tbox_actualDevDate" class="form-control" type="text" 
+                    value="<fmt:formatDate pattern="yyyy-MM-dd" value="${project.actualDevStartDate}"/>"/>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
                 <input id="hf_actualDevDate" type="hidden" value="" />
@@ -102,7 +114,8 @@
 		    <label for="tbox_actualAcceptDate" class="col-sm-2 control-label">实际验收时间</label>
     		<div class="col-sm-3">
 		    	<div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="hf_actualAcceptDate" data-link-format="yyyy-mm-dd">
-                    <input name="tbox_actualAcceptDate" id="tbox_actualAcceptDate" class="form-control" type="text" value=""  />
+                    <input name="tbox_actualAcceptDate" id="tbox_actualAcceptDate" class="form-control" type="text" 
+                    value="<fmt:formatDate pattern="yyyy-MM-dd" value="${project.actualAcceptDate}"/>"/>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                 </div>
                 <input  id="hf_actualAcceptDate" type="hidden" value="" />
@@ -112,7 +125,8 @@
     		<label for="tbox_devTech" class="col-sm-2 control-label">开发架构</label>
     		<div class="col-sm-3 on-dialog">
     			<div class="input-group">
-    				<input name="tbox_devTech" id="tbox_devTech" type="text" class="form-control" />
+    				<input name="tbox_devTech" id="tbox_devTech" type="text" class="form-control" 
+    				value="<c:out value="${project.devTech}"/>" />
     				<!--<span data-toggle="modal" data-target="#modal_devTech" id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>-->
     				<span id="span_devTechEdit" class="input-group-addon"><span  class="glyphicon glyphicon-pencil"></span></span>
     			</div>
@@ -120,7 +134,8 @@
 		    <label for="tbox_network" class="col-sm-2 control-label">网络环境</label>
     		<div class="col-sm-3">
 		    	<div class="input-group">
-    				<input name="tbox_network" id="tbox_network" type="text" class="form-control" />
+    				<input name="tbox_network" id="tbox_network" type="text" class="form-control" 
+    				value="<c:out value="${project.netWorkEnvironment}"/>" />
     				<span id="span_networkEdit" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
     			</div>
 		    </div>
@@ -129,14 +144,16 @@
     		<label for="tbox_serverE" class="col-sm-2 control-label">服务端环境</label>
     		<div class="col-sm-3">
 	    		<div class="input-group">
-					<input name="tbox_serverE" id="tbox_serverE" type="text" class="form-control" />
+					<input name="tbox_serverE" id="tbox_serverE" type="text" class="form-control" 
+					value="<c:out value="${project.serverEnvironment}"/>" />
 					<span id="span_serverEEdit" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 			</div>
 		    <label for="tbox_clientE" class="col-sm-2 control-label">客户端环境</label>
 		    <div class="col-sm-3">
 	    		<div class="input-group">
-					<input name="tbox_clientE" id="tbox_clientE" type="text" class="form-control" />
+					<input name="tbox_clientE" id="tbox_clientE" type="text" class="form-control" 
+					value="<c:out value="${project.clientEnvironment}"/>" />
 					<span id="span_clientEEdit" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 			</div>
@@ -144,43 +161,48 @@
     	<div class="form-group">
     		<label for="tbox_projectCdoe" class="col-sm-2 control-label">项目标识</label>
     		<div class="col-sm-1">
-		    	<input name="tbox_projectCdoe" type="text" class="form-control" id="tbox_projectCdoe" />
+		    	<input name="tbox_projectCdoe" type="text" class="form-control" id="tbox_projectCdoe" 
+		    	value="<c:out value="${project.projectCode}"/>" />
 		    </div>
 		    <label for="tbox_encryptFileLimit" class="col-sm-1 control-label">加密文件上限</label>
     		<div class="col-sm-1">
-		    	<input name="tbox_encryptFileLimit" type="text" class="form-control" id="tbox_encryptFileLimit" />
+		    	<input name="tbox_encryptFileLimit" type="text" class="form-control" id="tbox_encryptFileLimit" 
+		    	value="<c:out value="${project.encryptFileLimit}"/>" />
 		    </div>
 		    <div class="col-sm-1"></div>
 		    <div class="col-sm-1"></div>
     		<div class="col-sm-1">
 		    	<label>
-				    <input name="tbox_increaseIssue" type="checkbox" value="1">增发标识
+				    <input name="tbox_increaseIssue" type="checkbox" value="<c:out value="${project.increaseIssue}"/>">增发标识
 				</label>
 		    </div>
 		    <div class="col-sm-1">
 		    	<label>
-				    <input name="tbox_keepEncryptKey" type="checkbox" value="1">保持原有密钥
+				    <input name="tbox_keepEncryptKey" type="checkbox" value="<c:out value="${project.keepEncryptKey}"/>">保持原有密钥
 				</label>
 		    </div>
     	</div>
     	<div class="form-group">
     		<label for="tbox_multiOperation" class="col-sm-2 control-label">多人操作</label>
     		<div class="col-sm-8">
-		    	<input name="tbox_multiOperation" type="text" class="form-control" id="tbox_multiOperation" />
+		    	<input name="tbox_multiOperation" type="text" class="form-control" id="tbox_multiOperation" 
+		    	value="<c:out value="${project.multiOperation}"/>" />
 		    </div>
     	</div>
     	<div class="form-group">
     		<label for="tbox_SVSServerType" class="col-sm-2 control-label">签名服务器</label>
     		<div class="col-sm-3">
 		    	<div class="input-group">
-					<input name="tbox_SVSServerType" id="tbox_SVSServerType" type="text" class="form-control" />
+					<input name="tbox_SVSServerType" id="tbox_SVSServerType" type="text" class="form-control" 
+					value="<c:out value="${project.SVSServerType}"/>" />
 					<span id="span_SVSServerType" class="input-group-addon on-dialog"><span class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 		    </div>
 		    <label for="tbox_TSSServerType" class="col-sm-2 control-label">时间戳服务器</label>
     		<div class="col-sm-3">
 		    	<div class="input-group">
-					<input name="tbox_TSSServerType" id="tbox_TSSServerType" type="text" class="form-control" />
+					<input name="tbox_TSSServerType" id="tbox_TSSServerType" type="text" class="form-control" 
+					value="<c:out value="${project.TSSServerType}"/>" />
 					<span id="span_TSSServerType" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 		    </div>
@@ -189,14 +211,16 @@
     		<label for="tbox_keyManufacture" class="col-sm-2 control-label">介质</label>
     		<div class="col-sm-3">
 		    	<div class="input-group">
-					<input name="tbox_keyManufacture" id="tbox_keyManufacture" type="text" class="form-control" />
+					<input name="tbox_keyManufacture" id="tbox_keyManufacture" type="text" class="form-control" 
+					value="<c:out value="${project.keyManufacture}"/>" />
 					<span id="span_keyManufacture" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 		    </div>
 		    <label for="tbox_sealType" class="col-sm-2 control-label">签章</label>
     		<div class="col-sm-3">
 		    	<div class="input-group">
-					<input name="tbox_sealType" id="tbox_sealType" type="text" class="form-control" />
+					<input name="tbox_sealType" id="tbox_sealType" type="text" class="form-control" 
+					value="<c:out value="${project.sealType}"/>" />
 					<span id="span_sealType" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 		    </div>
@@ -205,7 +229,8 @@
     		<label for="tbox_functionNeededIntegrate" class="col-sm-2 control-label">集成功能</label>
     		<div class="col-sm-8">
     			<div class="input-group">
-					<input name="tbox_functionNeededIntegrate" id="tbox_functionNeededIntegrate" type="text" class="form-control" />
+					<input name="tbox_functionNeededIntegrate" id="tbox_functionNeededIntegrate" type="text" class="form-control" 
+					value="<c:out value="${project.functionsNeededIntegrate}"/>" />
 					<span id="span_functionNeededIntegrate" class="input-group-addon on-dialog"><span  class="glyphicon glyphicon-pencil"></span></span>
 				</div>
 		    </div>
@@ -343,7 +368,7 @@
     </div><!-- modal -->
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="<%=request.getContextPath()%>/resources/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/bootstrap_datepicker/bootstrap-datetimepicker.min.js"></script>

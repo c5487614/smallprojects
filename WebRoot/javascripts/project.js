@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	init();
+});
+function init(){
 	$.ajax({
 		type : 'POST',
 		url : 'getTop50.do',
@@ -9,8 +12,9 @@ $(document).ready(function(){
 			alert('failed');
 		}
 	});
-});
+}
 function initIndex(itemList){
+	$('#div_projectList').html('');
 	$(itemList).each(function(){
 		var obj = this;
 		getProjectTpl({
@@ -31,8 +35,15 @@ function initIndex(itemList){
 
 function getProjectTpl(data){
 	var styleMargin = 'margin-bottom:0px';
-	var html = '<div class="col-xs-2"><a href="viewProject.do?projectId={projectId}" class="thumbnail"><ul class="list-group">{0}</ul></a></div>';
+	var html = '<div class="col-xs-2"><a href="javascript:void(0);" onclick="viewProject(\'{projectId}\');" class="thumbnail"><ul class="list-group">{0}</ul></a>{buttonHtml}</div>';
+	var buttonHtml = '<div class="col-xs-2"></div><div class="btn-group btn-group-xs" style="text-align:center">' +
+	'<button type="button" onclick="viewProject(\'{projectId}\');" class="btn btn-default glyphicon glyphicon-eye-open">查看</button>' +
+	'<button type="button" onclick="editProject(\'{projectId}\');" class="btn btn-default glyphicon glyphicon-edit">编辑</button>' +
+	'<button type="button" onclick="deleteProject(\'{projectId}\');" class="btn btn-default glyphicon glyphicon-minus-sign">删除</button>' + 
+	'</div>';
+	
 	var i,tmp = '';
+	
 	for(i=0;i<data.items.length;i++){
 		var item = data.items[i];
 		item.style = styleMargin;
@@ -43,7 +54,8 @@ function getProjectTpl(data){
 	}
 
 	html = html.replace('{0}',tmp);
-	html = html.replace('{projectId}',data.projectId);
+	html = html.replace('{buttonHtml}',buttonHtml);
+	html = html.replace(/{projectId}/g,data.projectId);
 	$('#div_projectList').append(html);
 	html = '';
 	tmp = '';
@@ -51,4 +63,30 @@ function getProjectTpl(data){
 function getProjectItemTpl(data){
 	var html = '<ul class="list-group" style="'+data.style+'"> <li class="label '+data.itemStyle+'">'+data.value+'</li></ul>';
 	return html;
+}
+function viewProject(projectId){
+	window.location.href = 'viewProject.do?projectId=' + projectId;
+}
+function deleteProject(projectId){
+	$('#hf_projectId').val(projectId);
+	$('#deleteDialog').modal();
+}
+function doDelete(projectId){
+	$.ajax({
+		type : 'POST',
+		url : 'deleteOne.do',
+		data : {
+			projectId : $('#hf_projectId').val()
+		},
+		success : function(data,textStatus,jqXHR){
+			$('#deleteDialog').modal('hide');
+			init();
+		},
+		error : function(){
+			alert('failed');
+		}
+	});
+}
+function editProject(projectId){
+	window.location.href = 'editProject.do?projectId=' + projectId;
 }

@@ -21,7 +21,9 @@ public class ProjectService implements IProjectService {
 	@Override
 	public boolean delete(String id) {
 		// TODO Auto-generated method stub
-		return false;
+		int iEffectLines = -1;
+		iEffectLines = projectMapper.deleteByPrimaryKey(id);
+		return iEffectLines>0 ? true:false;
 	}
 
 	@Override

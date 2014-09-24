@@ -19,8 +19,8 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-core-2.2.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-annotations-2.2.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jackson-databind-2.2.0.jar"/>
-	<classpathentry kind="lib" path="E:/apache-tomcat-7.0.42/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jstl.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

@@ -116,6 +116,14 @@ public class ProjectController {
 		map.put("items", list);
 		return map;
 	}
+	@RequestMapping(value = "/deleteOne.do")
+	public @ResponseBody Map<String,Object> deleteOne(@RequestParam("projectId") String projectId){
+		Boolean bSucc = false;
+		bSucc = projectService.delete(projectId);
+		Map<String,Object> map =  new HashMap<String,Object>();
+		map.put("result", bSucc);
+		return map;
+	}
 	@RequestMapping(value = "/viewProject.do")
     public void viewProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String projectId = request.getParameter("projectId");
@@ -139,5 +147,29 @@ public class ProjectController {
 		request.setAttribute("interfaceUsed", listInterface);
 		request.setAttribute("functionUsed", listFuncs);
 		request.getRequestDispatcher("/project/viewProject.jsp").forward(request, response);
+	}
+	@RequestMapping(value = "/editProject.do")
+    public void editProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String projectId = request.getParameter("projectId");
+		ProjectinfoWithBLOBs record = projectService.selectByProjectId(projectId);
+		request.setAttribute("project", record);
+		String IInterfaceInfo =new String(record.getIntegrateInterfaceInfo(),"UTF8");
+		String IFunctionInfo =new String(record.getIntegrateFunctionsInfo(),"UTF8");
+		System.out.println(IInterfaceInfo);
+		String[] IIIs = IInterfaceInfo.split(",");
+		String[] IFIs = IFunctionInfo.split(",");
+		List<InterfaceUsed> listInterface = new ArrayList<InterfaceUsed>();
+		for( String item : IIIs ){
+			InterfaceUsed model = ProjectUtil.reserveInterface(item);
+			listInterface.add(model);
+		}
+		List<FunctionUsed> listFuncs = new ArrayList<FunctionUsed>();
+		for( String item : IFIs ){
+			FunctionUsed model = ProjectUtil.reserveFunctions(item);
+			listFuncs.add(model);
+		}
+		request.setAttribute("interfaceUsed", listInterface);
+		request.setAttribute("functionUsed", listFuncs);
+		request.getRequestDispatcher("/project/addProject.jsp").forward(request, response);
 	}
 }
