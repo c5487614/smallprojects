@@ -1,10 +1,16 @@
 package cn.org.hbca.project.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,8 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.org.hbca.project.model.FunctionUsed;
+import cn.org.hbca.project.model.InterfaceUsed;
 import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
 import cn.org.hbca.project.service.imp.ProjectService;
+import cn.org.hbca.project.util.ProjectUtil;
 
 @Controller
 @RequestMapping("/project")
@@ -106,5 +115,29 @@ public class ProjectController {
 		map.put("length", list.size());
 		map.put("items", list);
 		return map;
+	}
+	@RequestMapping(value = "/viewProject.do")
+    public void viewProject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String projectId = request.getParameter("projectId");
+		ProjectinfoWithBLOBs record = projectService.selectByProjectId(projectId);
+		request.setAttribute("project", record);
+		String IInterfaceInfo =new String(record.getIntegrateInterfaceInfo(),"UTF8");
+		String IFunctionInfo =new String(record.getIntegrateFunctionsInfo(),"UTF8");
+		System.out.println(IInterfaceInfo);
+		String[] IIIs = IInterfaceInfo.split(",");
+		String[] IFIs = IFunctionInfo.split(",");
+		List<InterfaceUsed> listInterface = new ArrayList<InterfaceUsed>();
+		for( String item : IIIs ){
+			InterfaceUsed model = ProjectUtil.reserveInterface(item);
+			listInterface.add(model);
+		}
+		List<FunctionUsed> listFuncs = new ArrayList<FunctionUsed>();
+		for( String item : IFIs ){
+			FunctionUsed model = ProjectUtil.reserveFunctions(item);
+			listFuncs.add(model);
+		}
+		request.setAttribute("interfaceUsed", listInterface);
+		request.setAttribute("functionUsed", listFuncs);
+		request.getRequestDispatcher("/project/viewProject.jsp").forward(request, response);
 	}
 }

@@ -25,7 +25,7 @@
     <jsp:include page="/header.jsp" />
     
     <form id="formProject" class="form-horizontal" role="form">
-    <input type="hidden" name="hf_projectId" id="hf_functions" value="" />
+    <input type="hidden" name="hf_projectId" id="hf_projectId" value="" />
     <input type="hidden" name="hf_functions" id="hf_functions" value="" />
     <input type="hidden" name="hf_interfaces" id="hf_interfaces" value="" />
     <fieldset>

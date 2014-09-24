@@ -14,6 +14,7 @@ function initIndex(itemList){
 	$(itemList).each(function(){
 		var obj = this;
 		getProjectTpl({
+			projectId : obj.projectId,
 			items:[
 			    {value:'项目名称：' + obj.projectName,itemStyle:'label-primary glyphicon glyphicon-bookmark'},
 				{value:'项目经理：'+ obj.projectManager},
@@ -30,7 +31,7 @@ function initIndex(itemList){
 
 function getProjectTpl(data){
 	var styleMargin = 'margin-bottom:0px';
-	var html = '<div class="col-xs-2"><a class="thumbnail"><ul class="list-group">{0}</ul></a></div>';
+	var html = '<div class="col-xs-2"><a href="viewProject.do?projectId={projectId}" class="thumbnail"><ul class="list-group">{0}</ul></a></div>';
 	var i,tmp = '';
 	for(i=0;i<data.items.length;i++){
 		var item = data.items[i];
@@ -40,7 +41,9 @@ function getProjectTpl(data){
 		}
 		tmp = tmp + getProjectItemTpl(data.items[i]);
 	}
+
 	html = html.replace('{0}',tmp);
+	html = html.replace('{projectId}',data.projectId);
 	$('#div_projectList').append(html);
 	html = '';
 	tmp = '';

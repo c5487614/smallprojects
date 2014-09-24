@@ -119,7 +119,7 @@ function checkBoxFunc1(obj){
 	var result1 = '';
 	for(i=0;i<list.size();i++){
 		var cbs1 = $(list[i]).find('input[type="checkbox"]');
-		console.log(list[i]);
+		
 		result = '';
 		for(j=0;j<cbs1.size();j++){
 			var item = $(cbs1[j]);
@@ -132,7 +132,7 @@ function checkBoxFunc1(obj){
 		}
 		result = '|' + result;
 		result1 = result1 + result;
-		console.log(result);
+		
 	}
 	resultContent.html(result1);
 }
@@ -474,6 +474,7 @@ function createDialogItemList(config){
 	return tmp.replace('{itemValue}',config.itemValue||config.itemName).replace('{itemName}',config.itemName);
 }
 function storeData(){
+	preStore();
 	$.ajax({
 		type : 'POST',
 		url : 'save.do',
@@ -486,4 +487,37 @@ function storeData(){
 			alert('failed');
 		}
 	});
+}
+function preStore(){
+	var interfacesUsed = '';
+	$("#table_interface tbody>tr").each(function(){
+		var item = '';
+		var items = $(this).find("td");
+		var i = 0;
+		for(i=0;i<4;i++){
+			if($(items[i]).html()){
+				item = item + $(items[i]).html() + '|';
+			}
+		}
+		if(item){
+			interfacesUsed = interfacesUsed + item + ',';
+		}
+	});
+	$('#hf_interfaces').val(interfacesUsed);
+	var functionsUsed = '';
+	$("#table_functions tbody>tr").each(function(){
+		var item = '';
+		var items = $(this).find("td");
+		var i = 0;
+		for(i=0;i<4;i++){
+			if($(items[i]).html()){
+				item = item + $(items[i]).html() + '|';
+			}
+		}
+		if(item){
+			functionsUsed = functionsUsed + item + ',';
+		}
+	});
+	$('#hf_functions').val(functionsUsed);
+	
 }

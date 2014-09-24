@@ -21,10 +21,6 @@
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style>
-    #div_projectList a {}
-    #div_projectList li:hover {}
-    a:hover{
-    }
     </style>
   </head>
   <body>
