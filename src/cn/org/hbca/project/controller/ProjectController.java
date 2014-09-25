@@ -36,7 +36,7 @@ public class ProjectController {
     }
 	
 	@RequestMapping(value = "/save.do")
-    public @ResponseBody String save(
+    public @ResponseBody Map<String,Object> save(
     		@RequestParam("hf_functions") String hf_functions,
     		@RequestParam("hf_interfaces") String hf_interfaces,
     		@RequestParam("hf_projectId") String hf_projectId,
@@ -67,6 +67,7 @@ public class ProjectController {
     		@RequestParam("tbox_sealType") String tbox_sealType,
     		@RequestParam("tbox_serverE") String tbox_serverE
     		) throws UnsupportedEncodingException {
+		boolean bIsUpdate = true;
 		ProjectinfoWithBLOBs model = new ProjectinfoWithBLOBs();
 		model.setActualAcceptDate(tbox_actualAcceptDate);
 		model.setActualDevStartDate(tbox_actualDevDate);
@@ -96,6 +97,7 @@ public class ProjectController {
 		model.setProjectCode(tbox_projectCdoe);
 		model.setProjectId(hf_projectId);//
 		if(model.getProjectId().equals("")){
+			bIsUpdate = false;
 			model.setProjectId(java.util.UUID.randomUUID().toString());
 		}
 		model.setProjectManager(tbox_projectManager);
@@ -104,9 +106,14 @@ public class ProjectController {
 		model.setServerEnvironment(tbox_serverE);
 		model.setSVSServerType(tbox_SVSServerType);
 		model.setTSSServerType(tbox_TSSServerType);
-		projectService.insert(model);
-		
-		return "{result:'测试ABC'}";
+		if(bIsUpdate){
+			projectService.update(model);
+		}else{
+			projectService.insert(model);
+		}
+		Map<String,Object> map =  new HashMap<String,Object>();
+		map.put("result", true);
+		return map;
     }
 	@RequestMapping(value = "/getTop50.do")
 	public @ResponseBody Map<String,Object> getTop50(){
@@ -155,18 +162,24 @@ public class ProjectController {
 		request.setAttribute("project", record);
 		String IInterfaceInfo =new String(record.getIntegrateInterfaceInfo(),"UTF8");
 		String IFunctionInfo =new String(record.getIntegrateFunctionsInfo(),"UTF8");
-		System.out.println(IInterfaceInfo);
+//		System.out.println(IInterfaceInfo);
 		String[] IIIs = IInterfaceInfo.split(",");
-		String[] IFIs = IFunctionInfo.split(",");
+		String[] IFIs = IFunctionInfo.split("\\|");
 		List<InterfaceUsed> listInterface = new ArrayList<InterfaceUsed>();
 		for( String item : IIIs ){
-			InterfaceUsed model = ProjectUtil.reserveInterface(item);
-			listInterface.add(model);
+			if(item!=null&&!"".equals(item)){
+				InterfaceUsed model = ProjectUtil.reserveInterface(item);
+				listInterface.add(model);
+			}
+			
 		}
 		List<FunctionUsed> listFuncs = new ArrayList<FunctionUsed>();
-		for( String item : IFIs ){
-			FunctionUsed model = ProjectUtil.reserveFunctions(item);
-			listFuncs.add(model);
+		for( String item1: IFIs ){
+			System.out.println(item1);
+			if(item1!=null&&!"".equals(item1)){
+				FunctionUsed model = ProjectUtil.reserveFunctions(item1);
+				listFuncs.add(model);
+			}
 		}
 		request.setAttribute("interfaceUsed", listInterface);
 		request.setAttribute("functionUsed", listFuncs);

@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.org.hbca.project.dao.ProjectinfoMapper;
-import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
 import cn.org.hbca.project.model.ProjectinfoExample;
-import cn.org.hbca.project.model.ProjectinfoExample.Criteria;
+import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
 import cn.org.hbca.project.service.IProjectService;
 
 @Service
@@ -34,8 +33,9 @@ public class ProjectService implements IProjectService {
 	}
 
 	@Override
-	public boolean update(ProjectinfoWithBLOBs model) {
+	public boolean update(ProjectinfoWithBLOBs record) {
 		// TODO Auto-generated method stub
+		projectMapper.updateByPrimaryKeyWithBLOBs(record);
 		return false;
 	}
 
@@ -55,7 +55,6 @@ public class ProjectService implements IProjectService {
 	public List<ProjectinfoWithBLOBs> selectTop50() {
 		// TODO Auto-generated method stub
 		ProjectinfoExample example = new ProjectinfoExample();
-		Criteria c = example.createCriteria();
 		example.setOrderByClause("ProjectInitDate DESC");
 		return projectMapper.selectByExampleWithBLOBs(example);
 	}

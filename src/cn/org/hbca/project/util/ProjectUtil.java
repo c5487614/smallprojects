@@ -6,7 +6,6 @@ import cn.org.hbca.project.model.InterfaceUsed;
 public class ProjectUtil {
 	public static InterfaceUsed reserveInterface(String value){
 		String[] values = value.split("\\|");
-		System.out.println(values.length);
 		InterfaceUsed model = new InterfaceUsed();
 		if(values.length>1){
 			model.setName(values[0]);

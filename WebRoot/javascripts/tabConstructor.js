@@ -3,7 +3,7 @@ var tabConstructor = {
 	tabHeadItem : '<li class="{headClass}"><a href="{href}" role="tab" data-toggle="tab">{tabName}</a></li>',
 	tabContent : '<div class="tab-content">{tabContent}</div>',
 	tabItem : '<div class="{tabItemClass}" id="{tabItemId}">{tabItemContent}</div>',
-	cbListContent : '<div class="list-group"><a href="#" class="list-group-item"><h4 class="list-group-item-heading">{itemTitle}</h4><p class="list-group-item-text">{itemList}</p></a></div>',
+	cbListContent : '<div class="list-group"><a href="javascript:void(0)" class="list-group-item"><h4 class="list-group-item-heading">{itemTitle}</h4><p class="list-group-item-text">{itemList}</p></a></div>',
 	cbListItem : '<label class="checkbox-inline"><input onclick="{itemClick}" type="checkbox" value="{itemValue}"> {itemName}</label>',
 	init : function(config){
 		var i,html;
@@ -46,7 +46,7 @@ var tabConstructor = {
 		var tmpCbListContent = this.cbListContent;
 		var tmpcbListItem = this.cbListItem;
 		var configTabContents = config.itemContent;
-		console.log(configTabContents);
+		//console.log(configTabContents);
 		//[{itemTitle:'',items:[{}]}]
 		var i,j,result;
 		result = '';
@@ -61,9 +61,13 @@ var tabConstructor = {
 		var i,result;
 		result = '';
 		var configListItems = config.items;
+		
 		//[{itemClick:'',itemValue:'',itemName:''}]
 		for(i=0;i<configListItems.length;i++){
 			result = result + tmpcbListItem.replace('{itemClick}', configListItems[i].itemClick).replace('{itemValue}', configListItems[i].itemValue).replace('{itemName}', configListItems[i].itemName);
+			if(configListItems[i].isInline!=undefined&&configListItems[i].isInline==false){
+				result = result.replace('class="checkbox-inline"','');
+			}
 		}
 		return result;
 	}

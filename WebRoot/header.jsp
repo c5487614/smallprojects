@@ -9,7 +9,7 @@
     			<li class="active">
     				<a id="nav_firstPage" class="glyphicon glyphicon-th-list navbar-brand">首页</a>
     			</li>
-				<li class="dropdown">
+				<li id="nav_project" class="dropdown">
 					<a href="index.jsp" class="glyphicon glyphicon-list-alt dropdown-toggle" data-toggle="dropdown">项目 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 						<li><a href="addProject.jsp">新增</a></li>

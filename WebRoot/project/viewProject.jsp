@@ -155,8 +155,8 @@
     			</tr>
     			<tr>
     				<td class="success" colspan="1">集成功能</td>
-    				<td colspan="1">
-    				<jsp:getProperty property="projectManager" name="project" />
+    				<td colspan="7">
+    				<jsp:getProperty property="functionsNeededIntegrate" name="project" />
     				</td>
     			</tr>
     			<tr>
@@ -196,5 +196,6 @@
     <script src="<%=request.getContextPath()%>/resources/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/javascripts/viewProject.js"></script>
   </body>
 </html>

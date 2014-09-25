@@ -3,6 +3,8 @@ $(document).ready(function(){
 	initDatepicker('#tbox_actualAcceptDate');
 	initDatepicker('#tbox_planDevDate');
 	initDatepicker('#tbox_planAcceptDate');
+	$('#nav_firstPage').parent().removeClass('active');
+	$('#nav_project').addClass('active');
 	
 	var editFunc = function(config){
 		$(config.targetId).click(function(){
@@ -27,6 +29,8 @@ $(document).ready(function(){
 					createInterfaceDialog();
 				}else if("modal_functions"==config.dialogId){
 					createFunctionsDialog();
+				}else if("modal_integrateFunctions"==config.dialogId){
+					createIntegrateFuncDialog();
 				}
 			}
 			$('#'+config.dialogId).modal('show');
@@ -42,6 +46,7 @@ $(document).ready(function(){
 	editFunc({'targetId': '#span_sealType','dialogId':'modal_sealType'});
 	editFunc({'targetId': '#span_interface','dialogId':'modal_interface'});
 	editFunc({'targetId': '#span_functions','dialogId':'modal_functions'});
+	editFunc({'targetId': '#span_functionNeededIntegrate','dialogId':'modal_integrateFunctions'});
 	
 	$.ajaxSetup({
 		accepts : 'application/json'
@@ -78,7 +83,7 @@ var TmpDialogContent = '<div id="{dialogId}" class="modal fade">' +
 							'</div>' +
 					   '</div>';
 var TmpListContent = '<div class="list-group">' +
-						'<a href="#" class="list-group-item">' +
+						'<a href="javascript:void(0);" class="list-group-item">' +
 							'<h4 class="list-group-item-heading">{itemTitle}</h4>' +
 							'<p class="list-group-item-text">{itemList}</p>' + 
 						'</a>'
@@ -115,7 +120,8 @@ function checkBoxFunc1(obj){
 	var i,result;
 	var j = 0;
 	
-	var list = $(obj).parents('.modal-body').find('.list-group-item-text');
+	//var list = $(obj).parents('.modal-body').find('.list-group-item-text');//
+	var list = $(obj).parents('.modal-body').find('.tab-pane');
 	var result1 = '';
 	for(i=0;i<list.size();i++){
 		var cbs1 = $(list[i]).find('input[type="checkbox"]');
@@ -306,31 +312,131 @@ function createSealTypeDialog(){
 		};
 	$(document.body).append(createDialog(config));
 }
-function createInterfaceDialog(){
+function createIntegrateFuncDialog(){
 	var config = {
-		'dialogId' : 'modal_interface',
-		'ctrlId' : '',
-		'title' : '接口类型',
-		'okBtnClick' : 'interfaceClick(this);',
-		'itemList' : [
-			{
-				'itemTitle' : 'SVS接口', 
-				'items' : [
-					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎17‎日 10:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.1|‎2014‎年‎4‎月‎17‎日 10:52:25|' , 'isInline':false},
-					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.8 ‎2014‎年‎5‎月‎22‎日 10:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.6|‎2014‎年‎4‎月‎17‎日 10:52:25|' ,'isInline':false},
-					{'itemName' : 'SVS_S_SDK_COM.dll 1.0.0.8 ‎2014‎年‎6月‎15‎日 11:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.8|‎‎2014‎年‎6月‎15‎日 11:52:25|' ,'isInline':false}
-				]
-			},
-			{
-				'itemTitle' : 'JIT接口', 
-				'items' : [
-					{'itemName' : 'JITClientCOMAPI.dll 2.0.23.20 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false},
-					{'itemName' : 'JITClientCOMAPI.dll 2.0.23.42 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false}
-				]
-			}
-		]
-	};
+			'dialogId' : 'modal_integrateFunctions',
+			'ctrlId' : 'tbox_functionNeededIntegrate',
+			'title' : '集成功能',
+			'itemList' : [
+				{
+					'itemTitle' : '', 
+					'items' : [
+						{'itemName' : '登陆'},
+						{'itemName' : '签名验签'},
+						{'itemName' : '时间戳'},
+						{'itemName' : '数字信封'},
+						{'itemName' : '加密解密'}
+					]
+				}
+			]
+		};
 	$(document.body).append(createDialog(config));
+}
+function createInterfaceDialog(){
+//	var config = {
+//		'dialogId' : 'modal_interface',
+//		'ctrlId' : '',
+//		'title' : '接口类型',
+//		'okBtnClick' : 'interfaceClick(this);',
+//		'itemList' : [
+//			{
+//				'itemTitle' : 'SVS接口', 
+//				'items' : [
+//					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎17‎日 10:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.1|‎2014‎年‎4‎月‎17‎日 10:52:25|' , 'isInline':false},
+//					{'itemName' : 'SVS_C_SDK_COM.dll 1.0.0.8 ‎2014‎年‎5‎月‎22‎日 10:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.6|‎2014‎年‎4‎月‎17‎日 10:52:25|' ,'isInline':false},
+//					{'itemName' : 'SVS_S_SDK_COM.dll 1.0.0.8 ‎2014‎年‎6月‎15‎日 11:52:25 ', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.8|‎‎2014‎年‎6月‎15‎日 11:52:25|' ,'isInline':false}
+//				]
+//			},
+//			{
+//				'itemTitle' : 'JIT接口', 
+//				'items' : [
+//					{'itemName' : 'JITClientCOMAPI.dll 2.0.23.20 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false},
+//					{'itemName' : 'JITClientCOMAPI.dll 2.0.23.42 ‎‎2013‎年‎5‎月‎15‎日 11:32:55 ', 'isInline':false}
+//				]
+//			}
+//		]
+//	};
+//	$(document.body).append(createDialog(config));
+	var config = {
+			'dialogId' : 'modal_interface',
+			'ctrlId' : '',
+			'title' : '集成接口',
+			'okBtnClick' : 'interfaceClick(this);',
+			'tabHeads' : [
+              {'href':'SVSClientControl','tabName':'SVS客户端接口','headClass':'active'},
+              {'href':'SVSServerControl','tabName':'SVS服务端接口'},
+              {'href':'JITControl','tabName':'JIT接口'},
+              {'href':'DianjuControl','tabName':'点聚接口'},
+              {'href':'AZTControl','tabName':'安政通接口'}
+			],
+			'tabItems' : [
+              {
+            	  'tabItemClass':'tab-pane active',
+            	  'tabItemId':'SVSClientControl',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.11|‎2014‎年‎5‎月‎29‎日 15:42:06|','itemName':'SVS_C_SDK_COM.dll 1.0.0.11 ‎‎2014‎年‎5‎月‎29‎日 15:42:06 ','isInline':false},
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'SVS_C_SDK_COM.dll|1.0.0.1|‎2014‎年‎4‎月‎17‎日 10:52:25|','itemName':'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎17‎日 10:52:25 ','isInline':false}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'SVSServerControl',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'SVS_S_SDK_COM.dll|1.0.0.8|‎2014‎年‎4‎月‎24‎日 13:56:29|','itemName':'SVS_C_SDK_COM.dll 1.0.0.1 ‎2014‎年‎4‎月‎24‎日 13:56:29 ','isInline':false},
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'SVS_S_SDK_COM.dll|1.0.0.8|2013‎年‎9‎月‎24‎日 9:55:28|','itemName':'SVS_S_SDK_COM.dll 1.0.0.8 ‎‎2013‎年‎9‎月‎24‎日 9:55:28 ','isInline':false}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'JITControl',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'',
+            	    	   'items':[
+            	    	        {'itemClick':'checkBoxFunc(this)', 'itemValue':'JITCrypto.dll|4.0.0.11|‎无|','itemName':'JITCrypto.dll 4.0.0.11 2.66 MB ','isInline':false},
+            	    	        {'itemClick':'checkBoxFunc(this)', 'itemValue':'JITUsbKeyCom.dll|1.0.0.6|‎‎2013‎年‎5‎月‎10‎日 16:44:31|','itemName':'JITUsbKeyCom.dll 1.0.0.6 ‎2013‎年‎5‎月‎10‎日 16:44:31 ','isInline':false},
+            	    	        {'itemClick':'checkBoxFunc(this)', 'itemValue':'JITClientCOMAPI.dll|2.0.23.20|‎2013‎年‎5‎月‎15‎日 11:32:55|','itemName':'JITClientCOMAPI.dll 2.0.23.20 ‎2013‎年‎5‎月‎15‎日 11:32:55','isInline':false}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'DianjuControl',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'MakeSealV6_onlysign.ocx|1.1.0.6|‎‎2014‎年‎6‎月‎25‎日 10:00:42|','itemName':'MakeSealV6_onlysign.ocx 4.0.0.11 ‎2014‎年‎6‎月‎25‎日 10:00:42 ','isInline':false}
+    	    	            ]
+            	       }
+	               ]
+              },
+              {
+            	  'tabItemClass':'tab-pane',
+            	  'tabItemId':'AZTControl',
+            	  'itemContent':[
+            	       {
+            	    	   'itemTitle':'',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'AZTSealSignature.ocx|1.0.0.1|‎无|','itemName':'AZTSealSignature.ocx 1.0.0.1 ','isInline':false}
+    	    	            ]
+            	       }
+	               ]
+              }
+			]
+		};
+		$(document.body).append(tabConstructor.init(config));
 }
 function createFunctionsDialog(){
 	var config = {
@@ -355,7 +461,8 @@ function createFunctionsDialog(){
     	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'登陆','itemName':'登陆'},
     	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'签名验签','itemName':'签名验签'},
     	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'时间戳','itemName':'时间戳'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'签章','itemName':'签章'}
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'签章','itemName':'签章'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemValue':'数字信封','itemName':'数字信封'}
     	    	            ]
             	       }
 	               ]
@@ -365,12 +472,21 @@ function createFunctionsDialog(){
             	  'tabItemId':'clientFunc',
             	  'itemContent':[
             	       {
-            	    	   'itemTitle':'SVS_C_SDK_COM.DLL',
+            	    	   'itemTitle':'签名验签',
             	    	   'items':[
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_TEST','itemValue':'SOF_TEST'}
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GenRandom','itemValue':'SOF_GenRandom'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_SetHashMethod','itemValue':'SOF_SetHashMethod'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_SetP7SignMode','itemValue':'SOF_SetP7SignMode'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_SignDataByP7','itemValue':'SOF_SignDataByP7'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GetErrorMsg','itemValue':'SOF_GetErrorMsg'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Login','itemValue':'SOF_Login'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_VerifyAttachSigned','itemValue':'SOF_VerifyAttachSigned'}
+    	    	            ]
+            	       },
+            	       {
+            	    	   'itemTitle':'签章',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GetKeyPictureEx','itemValue':'SOF_GetKeyPictureEx'}
     	    	            ]
             	       }
 	               ]
@@ -380,12 +496,22 @@ function createFunctionsDialog(){
             	  'tabItemId':'serverFunc',
             	  'itemContent':[
             	       {
-            	    	   'itemTitle':'SVS_S_SDK_COM.DLL',
+            	    	   'itemTitle':'签名验签',
             	    	   'items':[
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'},
-    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_Server','itemValue':'SOF_Server'}
+            	    	        {'itemClick':'checkBoxFunc1(this)','itemName':'SOF_SetServerInfo','itemValue':'SOF_SetServerInfo'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GenRandom','itemValue':'SOF_GenRandom'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_SetP7SignMode','itemValue':'SOF_SetP7SignMode'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_SignDataPkcs7','itemValue':'SOF_SignDataPkcs7'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_VerifySignedDataPkcs7','itemValue':'SOF_VerifySignedDataPkcs7'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GetP7SignDataInfo','itemValue':'SOF_GetP7SignDataInfo'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GetCertInfo','itemValue':'SOF_GetCertInfo'},
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_GetCertInfoByOid','itemValue':'SOF_GetCertInfoByOid'}
+    	    	            ]
+            	       },
+            	       {
+            	    	   'itemTitle':'时间戳',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'SOF_CreateTimeStampResponse','itemValue':'SOF_CreateTimeStampResponse'}
     	    	            ]
             	       }
 	               ]
@@ -396,6 +522,12 @@ function createFunctionsDialog(){
             	  'itemContent':[
             	       {
             	    	   'itemTitle':'备注',
+            	    	   'items':[
+    	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'无','itemValue':'无'}
+    	    	            ]
+            	       },
+            	       {
+            	    	   'itemTitle':'备注1',
             	    	   'items':[
     	    	            	{'itemClick':'checkBoxFunc1(this)','itemName':'无','itemValue':'无'}
     	    	            ]

@@ -27,7 +27,9 @@
     <jsp:include page="/header.jsp" />
     
     <form id="formProject" class="form-horizontal" role="form">
-    <input type="hidden" name="hf_projectId" id="hf_projectId" value="" />
+    <input type="hidden" name="hf_projectId" id="hf_projectId" 
+    value="<c:out value="${project.projectId}"/>"
+    />
     <input type="hidden" name="hf_functions" id="hf_functions" value="" />
     <input type="hidden" name="hf_interfaces" id="hf_interfaces" value="" />
     <fieldset>
@@ -44,6 +46,9 @@
 		    		<option value="喻欢">喻欢</option>
 		    		<option value="杨文志">杨文志</option>
 		    		<option value="黄丽莎">黄丽莎</option>
+		    		<c:if test="${project!=null && project.projectManager!=''}" >
+		    			<option value="<c:out value="${project.projectManager}"/>" selected><c:out value="${project.projectManager}"/></option>
+		    		</c:if> 
 		    	</select>
 		    </div>
     	</div>
@@ -173,12 +178,14 @@
 		    <div class="col-sm-1"></div>
     		<div class="col-sm-1">
 		    	<label>
-				    <input name="tbox_increaseIssue" type="checkbox" value="<c:out value="${project.increaseIssue}"/>">增发标识
+				    <input name="tbox_increaseIssue" type="checkbox" <c:if test="${project.increaseIssue == 'on'}">checked="checked"</c:if> 
+				    />增发标识
 				</label>
 		    </div>
 		    <div class="col-sm-1">
 		    	<label>
-				    <input name="tbox_keepEncryptKey" type="checkbox" value="<c:out value="${project.keepEncryptKey}"/>">保持原有密钥
+				    <input name="tbox_keepEncryptKey" type="checkbox"  <c:if test="${project.keepEncryptKey}">checked="checked"</c:if> 
+				    />保持原有密钥
 				</label>
 		    </div>
     	</div>
@@ -262,6 +269,15 @@
 							<th class="col-sm-1"></th>
 						</thead>
 						<tbody>
+							<c:forEach var="model" items="${interfaceUsed}">
+			    			<tr>
+			    				<td><c:out value="${model.name}"/></td>
+			    				<td><c:out value="${model.version}"/></td>
+			    				<td><c:out value="${model.signDate}"/></td>
+			    				<td><c:out value="${model.other}"/></td>
+			    				<td><button onclick="removeInterface(this);" type="button" class="btn btn-link glyphicon glyphicon-minus"></button></td>
+			    			</tr>
+    			</c:forEach>
 							<tr id="interfaceAct">
 								<td></td>
 								<td></td>
@@ -288,6 +304,15 @@
 						<th class="col-sm-1"></th>
 					</thead>
 					<tbody>
+						<c:forEach var="model" items="${functionUsed}">
+		    			<tr>
+		    				<td><c:out value="${model.name}"/></td>
+		    				<td><c:out value="${model.clientFunctions}"/></td>
+		    				<td><c:out value="${model.serverFunctions}"/></td>
+		    				<td><c:out value="${model.other}"/></td>
+		    				<td><button id="span_interface" onclick="removeInterface(this);" type="button" class="btn btn-link glyphicon glyphicon-minus"></button></td>
+		    			</tr>
+		    			</c:forEach>
 						<tr id="functionAct">
 							<td></td>
 							<td></td>
@@ -304,7 +329,7 @@
 		</fieldset>	
     </form>
     <!-- Dev framework dialog -->
-    <div id="modal_devTech" class="modal fade">
+    <div id="modal_devTech__xxx" class="modal fade">
     	<div class="modal-dialog">
     		<div class="modal-content">
 				<div class="modal-header">

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$('#nav_firstPage').parent().removeClass('active');
+	$('#nav_project').addClass('active');
 	init();
 });
 function init(){
@@ -34,9 +36,9 @@ function initIndex(itemList){
 }
 
 function getProjectTpl(data){
-	var styleMargin = 'margin-bottom:0px';
-	var html = '<div class="col-xs-2"><a href="javascript:void(0);" onclick="viewProject(\'{projectId}\');" class="thumbnail"><ul class="list-group">{0}</ul></a>{buttonHtml}</div>';
-	var buttonHtml = '<div class="col-xs-2"></div><div class="btn-group btn-group-xs" style="text-align:center">' +
+	var styleMargin = 'margin-bottom:0px;';
+	var html = '<div class="col-xs-2" style="margin-bottom:5px"><a href="javascript:void(0);" onclick="viewProject(\'{projectId}\');" class="thumbnail"><ul class="list-group">{0}</ul></a>{buttonHtml}</div>';
+	var buttonHtml = '<div class="col-xs-1"></div><div class="btn-group btn-group-xs" style="text-align:center">' +
 	'<button type="button" onclick="viewProject(\'{projectId}\');" class="btn btn-default glyphicon glyphicon-eye-open">查看</button>' +
 	'<button type="button" onclick="editProject(\'{projectId}\');" class="btn btn-default glyphicon glyphicon-edit">编辑</button>' +
 	'<button type="button" onclick="deleteProject(\'{projectId}\');" class="btn btn-default glyphicon glyphicon-minus-sign">删除</button>' + 
