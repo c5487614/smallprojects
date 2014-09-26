@@ -417,7 +417,8 @@ function createInterfaceDialog(){
             	       {
             	    	   'itemTitle':'',
             	    	   'items':[
-    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'MakeSealV6_onlysign.ocx|1.1.0.6|‎‎2014‎年‎6‎月‎25‎日 10:00:42|','itemName':'MakeSealV6_onlysign.ocx 4.0.0.11 ‎2014‎年‎6‎月‎25‎日 10:00:42 ','isInline':false}
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'MakeSealV6_onlysign.ocx|1.1.0.6|‎‎2014‎年‎6‎月‎25‎日 10:00:42|','itemName':'MakeSealV6_onlysign.ocx 4.0.0.11 ‎2014‎年‎6‎月‎25‎日 10:00:42 ','isInline':false},
+    	    	            	{'itemClick':'checkBoxFunc(this)', 'itemValue':'HBCA_SOFSeal.dll|1.0.0.1|‎2014‎年‎6‎月‎25‎日 9:59:50|','itemName':'HBCA_SOFSeal.dll 1.0.0.1 ‎‎2014‎年‎6‎月‎25‎日 9:59:50 ','isInline':false}
     	    	            ]
             	       }
 	               ]
@@ -632,7 +633,7 @@ function preStore(){
 			}
 		}
 		if(item){
-			interfacesUsed = interfacesUsed + item + ',';
+			interfacesUsed = interfacesUsed + item + '&&&';
 		}
 	});
 	$('#hf_interfaces').val(interfacesUsed);
@@ -647,7 +648,7 @@ function preStore(){
 			}
 		}
 		if(item){
-			functionsUsed = functionsUsed + item + ',';
+			functionsUsed = functionsUsed + item + '&&&';
 		}
 	});
 	$('#hf_functions').val(functionsUsed);

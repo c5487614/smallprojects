@@ -139,8 +139,8 @@ public class ProjectController {
 		String IInterfaceInfo =new String(record.getIntegrateInterfaceInfo(),"UTF8");
 		String IFunctionInfo =new String(record.getIntegrateFunctionsInfo(),"UTF8");
 		System.out.println(IInterfaceInfo);
-		String[] IIIs = IInterfaceInfo.split(",");
-		String[] IFIs = IFunctionInfo.split(",");
+		String[] IIIs = IInterfaceInfo.split("&&&");
+		String[] IFIs = IFunctionInfo.split("&&&");
 		List<InterfaceUsed> listInterface = new ArrayList<InterfaceUsed>();
 		for( String item : IIIs ){
 			InterfaceUsed model = ProjectUtil.reserveInterface(item);
@@ -163,8 +163,8 @@ public class ProjectController {
 		String IInterfaceInfo =new String(record.getIntegrateInterfaceInfo(),"UTF8");
 		String IFunctionInfo =new String(record.getIntegrateFunctionsInfo(),"UTF8");
 //		System.out.println(IInterfaceInfo);
-		String[] IIIs = IInterfaceInfo.split(",");
-		String[] IFIs = IFunctionInfo.split("\\|");
+		String[] IIIs = IInterfaceInfo.split("&&&");
+		String[] IFIs = IFunctionInfo.split("&&&");
 		List<InterfaceUsed> listInterface = new ArrayList<InterfaceUsed>();
 		for( String item : IIIs ){
 			if(item!=null&&!"".equals(item)){
@@ -175,7 +175,6 @@ public class ProjectController {
 		}
 		List<FunctionUsed> listFuncs = new ArrayList<FunctionUsed>();
 		for( String item1: IFIs ){
-			System.out.println(item1);
 			if(item1!=null&&!"".equals(item1)){
 				FunctionUsed model = ProjectUtil.reserveFunctions(item1);
 				listFuncs.add(model);
