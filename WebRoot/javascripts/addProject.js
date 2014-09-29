@@ -614,7 +614,10 @@ function storeData(){
 		data : $('#formProject').serialize(),
 		cache : false,
 		success : function(data,textStatus,jqXHR){
-			alert(data);
+			$("#successDialog").modal();
+			setTimeout(function(){
+				$("#successDialog").modal('hide');
+			},1000)
 		},
 		error : function(){
 			alert('failed');

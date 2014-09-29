@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import cn.org.hbca.project.dao.ProjectinfoMapper;
 import cn.org.hbca.project.model.ProjectinfoExample;
 import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
+import cn.org.hbca.project.model.ProjectinfoExample.Criteria;
 import cn.org.hbca.project.service.IProjectService;
 
 @Service
@@ -18,11 +19,16 @@ public class ProjectService implements IProjectService {
 	
 
 	@Override
-	public boolean delete(String id) {
+	public boolean delete(String projectId) {
 		// TODO Auto-generated method stub
 		int iEffectLines = -1;
-		iEffectLines = projectMapper.deleteByPrimaryKey(id);
-		return iEffectLines>0 ? true:false;
+//		ProjectinfoWithBLOBs model = projectMapper.selectByPrimaryKey(projectId);
+//		ProjectinfoExample example = new ProjectinfoExample();
+//		projectMapper.updateByPrimaryKey(model);
+//		projectMapper.updateByExampleSelective(model, example);
+//		projectMapper.updateByExample(record, example)
+		iEffectLines = projectMapper.deleteByPrimaryKey(projectId);
+		return iEffectLines > 0 ? true:false;
 	}
 
 	@Override

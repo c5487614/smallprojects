@@ -25,7 +25,6 @@
   </head>
   <body>
     <jsp:include page="/header.jsp" />
-    
     <form id="formProject" class="form-horizontal" role="form">
     <input type="hidden" name="hf_projectId" id="hf_projectId" 
     value="<c:out value="${project.projectId}"/>"
@@ -392,6 +391,23 @@
     	</div><!-- modal dialog -->
     </div><!-- modal -->
     
+    
+    <!--success dialog-->
+    <div id="successDialog" class="modal fade">
+    <div class="modal-dialog">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title">信息</h4>
+		  </div>
+		  <div class="modal-body">
+		  	<p>添加成功</p>
+		  </div>
+	  </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--success dialog-->
+	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<%=request.getContextPath()%>/resources/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

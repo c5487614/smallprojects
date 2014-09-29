@@ -138,7 +138,7 @@ public class ProjectController {
 		request.setAttribute("project", record);
 		String IInterfaceInfo =new String(record.getIntegrateInterfaceInfo(),"UTF8");
 		String IFunctionInfo =new String(record.getIntegrateFunctionsInfo(),"UTF8");
-		System.out.println(IInterfaceInfo);
+		//System.out.println(IInterfaceInfo);
 		String[] IIIs = IInterfaceInfo.split("&&&");
 		String[] IFIs = IFunctionInfo.split("&&&");
 		List<InterfaceUsed> listInterface = new ArrayList<InterfaceUsed>();

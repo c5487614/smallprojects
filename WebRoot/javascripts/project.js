@@ -19,17 +19,21 @@ function initIndex(itemList){
 	$('#div_projectList').html('');
 	$(itemList).each(function(){
 		var obj = this;
+		if(obj.projectName.length>7){
+			obj.projectNameAlias = obj.projectName.substring(0,7)+'...';
+		}
+		var text = obj.projectNameAlias||obj.projectName;
 		getProjectTpl({
 			projectId : obj.projectId,
 			items:[
-			    {value:'项目名称：' + obj.projectName,itemStyle:'label-primary glyphicon glyphicon-bookmark'},
+			    {value:'项目名称：' + text,itemStyle:'label-primary glyphicon glyphicon-bookmark'},
 				{value:'项目经理：'+ obj.projectManager},
 				{value:'项目集成商：' + obj.manufacturerName},
 				{value:'介质类型：' + obj.keyManufacture},
 				{value:'签名服务器：' + obj.svsserverType},
 				{value:'时间戳服务器：' + obj.tssserverType},
 				{value:'签章类型：' + obj.sealType},
-				{value:'项目进度：' + obj.sealType, itemStyle:'label-warning'}
+				{value:'项目进度：' + 'none ', itemStyle:'label-warning'}
 			]
 		})
 	});
@@ -52,7 +56,7 @@ function getProjectTpl(data){
 		if(!item.itemStyle){
 			item.itemStyle = "label-default";
 		}
-		tmp = tmp + getProjectItemTpl(data.items[i]);
+		tmp = tmp + getProjectItemTpl(item);
 	}
 
 	html = html.replace('{0}',tmp);

@@ -27,8 +27,8 @@
     <jsp:include page="/header.jsp" />
     <jsp:useBean id="project" type="cn.org.hbca.project.model.ProjectinfoWithBLOBs" scope="request"></jsp:useBean>
     <div class="container-fluid">
-    <div class="col-sm-2"></div>
-    <div class="panel panel-default col-sm-8">
+    <div class="col-sm-1"></div>
+    <div class="panel panel-default col-sm-10">
     	<div class="panel-body">
     		<table class="table table-bordered">
     			<tr>
@@ -120,11 +120,25 @@
     				</td>
     				<td class="success" colspan="1">增发标识</td>
     				<td colspan="1">
-    				<jsp:getProperty property="increaseIssue" name="project" />
+    				<c:choose>
+    					<c:when test="${project.increaseIssue == 'on'}">
+    					是
+    					</c:when>
+    					<c:otherwise>
+    					否
+    					</c:otherwise>
+    				</c:choose>
     				</td>
     				<td class="success" colspan="1">保持原有密钥</td>
     				<td colspan="1">
-    				<jsp:getProperty property="keepEncryptKey" name="project" />
+    				<c:choose>
+    					<c:when test="${project.keepEncryptKey}">
+    					是
+    					</c:when>
+    					<c:otherwise>
+    					否
+    					</c:otherwise>
+    				</c:choose>
     				</td>
     			</tr>
     			<tr>
@@ -159,6 +173,10 @@
     				<jsp:getProperty property="functionsNeededIntegrate" name="project" />
     				</td>
     			</tr>
+    			</table>
+    			
+    			<table class="table table-bordered table-hover">
+    			<tbody>
     			<tr>
     				<td class="success" colspan="2">接口库名称</td>
     				<td class="success" colspan="2">版本号</td>
@@ -178,7 +196,7 @@
     				<td class="success" colspan="2">实现功能</td>
     				<td class="success" colspan="2">客户端调用接口</td>
     				<td class="success" colspan="2">服务端调用接口</td>
-    				<td class="success" colspan="2">其他</td>
+    				<td class="success" colspan="2" noWrap="noWrap">其他</td>
     			</tr>
     			<c:forEach var="model" items="${functionUsed}">
     			<tr>
@@ -188,6 +206,7 @@
     				<td colspan="2"><c:out value="${model.other}"/></td>
     			</tr>
     			</c:forEach>
+    			</tbody>
     		</table>
     	</div>
     </div>
