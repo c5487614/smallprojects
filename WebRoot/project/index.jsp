@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>add project</title>
-
+    <title>项目信息</title>
+    <link rel="shortcut icon" href="<%=request.getContextPath()%>/cch32.ico" />
     <!-- Bootstrap -->
     <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     

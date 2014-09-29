@@ -7,7 +7,6 @@
 	</target>
 	<path id="compile.classpath"> 
 		<fileset dir="WebRoot/WEB-INF/lib"> 
-			<excludesfile name="WebRoot/WEB-INF/libservlet-api.jar"/>
 	    </fileset> 
 	</path>
 	<target name="compile" depends="init" > 
@@ -22,25 +21,6 @@
 	    	</fileset>
 	    </war> 
 	</target> 
-	<!--
-	<fileset dir="D:/apache-tomcat-7.0.53/lib"> 
-	    <include name="*.jar"/> 
-	</fileset> 
-	<target name="war" depends="compile"> 
-	    <war destfile="dist/ROOT.rar" webxml="WebRoot/WEB-INF/web.xml"> 
-	        <fileset dir="WebRoot">
-	        	<exclude name="WebRoot/WEB-INF/classes/"/>
-	    	</fileset>
-	    	<classes dir="build/classes"/> 
-	    </war> 
-	</target> 
-	
-	<copydir todir="dist/ROOT">
-		<fileset dir="WebRoot">
-			todir="dist/ROOT/WEB-INF/classes/cch"
-		</fileset>
-	</copydir>
-	-->
 	<target name="classescopy">
 		<copy todir="dist/ROOT/WEB-INF">
 		    <fileset dir="WebRoot/WEB-INF">

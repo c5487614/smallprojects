@@ -106,6 +106,7 @@ public class ProjectController {
 		model.setServerEnvironment(tbox_serverE);
 		model.setSVSServerType(tbox_SVSServerType);
 		model.setTSSServerType(tbox_TSSServerType);
+		model.setProjectStatus("1");
 		if(bIsUpdate){
 			projectService.update(model);
 		}else{
