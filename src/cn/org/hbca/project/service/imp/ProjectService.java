@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.org.hbca.project.dao.ProjectinfoMapper;
+import cn.org.hbca.project.model.Projectinfo;
 import cn.org.hbca.project.model.ProjectinfoExample;
 import cn.org.hbca.project.model.ProjectinfoWithBLOBs;
-import cn.org.hbca.project.model.ProjectinfoExample.Criteria;
 import cn.org.hbca.project.service.IProjectService;
 
 @Service
@@ -23,11 +23,14 @@ public class ProjectService implements IProjectService {
 		// TODO Auto-generated method stub
 		int iEffectLines = -1;
 //		ProjectinfoWithBLOBs model = projectMapper.selectByPrimaryKey(projectId);
-//		ProjectinfoExample example = new ProjectinfoExample();
-//		projectMapper.updateByPrimaryKey(model);
-//		projectMapper.updateByExampleSelective(model, example);
-//		projectMapper.updateByExample(record, example)
-		iEffectLines = projectMapper.deleteByPrimaryKey(projectId);
+		ProjectinfoWithBLOBs model = new ProjectinfoWithBLOBs(); 
+		model.setProjectId(projectId);
+		model.setProjectStatus("d");
+		ProjectinfoExample example = new ProjectinfoExample();
+//		example.createCriteria().andProjectIdEqualTo(projectId);
+//		iEffectLines = projectMapper.deleteByPrimaryKey(projectId);
+		
+		iEffectLines = projectMapper.updateByPrimaryKey(model);
 		return iEffectLines > 0 ? true:false;
 	}
 
@@ -61,6 +64,8 @@ public class ProjectService implements IProjectService {
 	public List<ProjectinfoWithBLOBs> selectTop50() {
 		// TODO Auto-generated method stub
 		ProjectinfoExample example = new ProjectinfoExample();
+		example.createCriteria().andProjectStatusNotEqualTo("d");
+//		example.createCriteria().andProjectStatusEqualTo("d");
 		example.setOrderByClause("ProjectInitDate DESC");
 		return projectMapper.selectByExampleWithBLOBs(example);
 	}

@@ -607,6 +607,12 @@ function createDialogItemList(config){
 	return tmp.replace('{itemValue}',config.itemValue||config.itemName).replace('{itemName}',config.itemName);
 }
 function storeData(){
+	if($('#tbox_projectName').val()==''){
+		$("#warningDialog").modal();
+		setTimeout(function(){
+			$("#warningDialog").modal('hide');
+		},1000)
+	}
 	preStore();
 	$.ajax({
 		type : 'POST',

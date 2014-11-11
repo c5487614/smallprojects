@@ -99,6 +99,7 @@ public class ProjectController {
 		if(model.getProjectId().equals("")){
 			bIsUpdate = false;
 			model.setProjectId(java.util.UUID.randomUUID().toString());
+			model.setProjectStatus("a");//a means active d means delete
 		}
 		model.setProjectManager(tbox_projectManager);
 		model.setProjectName(tbox_projectName);

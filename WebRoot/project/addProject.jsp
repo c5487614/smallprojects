@@ -408,6 +408,24 @@
 	</div><!-- /.modal -->
 	<!--success dialog-->
 	
+	<!--warning dialog-->
+    <div id="warningDialog" class="modal fade">
+    <div class="modal-dialog">
+	  <div class="modal-content">
+		  <div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <h4 class="modal-title">错误</h4>
+		  </div>
+		  <div class="modal-body">
+		  	<div class="alert alert-danger" role="alert">
+  				<a href="#" class="alert-link">信息不完整</a>
+			</div>
+		  </div>
+	  </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	<!--warning dialog-->
+	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<%=request.getContextPath()%>/resources/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
