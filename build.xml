@@ -10,7 +10,7 @@
 	    </fileset> 
 	</path>
 	<target name="compile" depends="init" > 
-	    <javac destdir="WebRoot/WEB-INF/classes" debug="false" srcdir="src"> 
+	    <javac target="1.6" destdir="WebRoot/WEB-INF/classes" debug="false" srcdir="src"> 
 	        <classpath refid="compile.classpath"/> 
 	    </javac> 
 	</target>
