@@ -612,6 +612,7 @@ function storeData(){
 		setTimeout(function(){
 			$("#warningDialog").modal('hide');
 		},1000)
+		return ;
 	}
 	preStore();
 	$.ajax({
