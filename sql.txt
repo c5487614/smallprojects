@@ -7,11 +7,12 @@ drop table if exists DialogItemConfig;
 /*==============================================================*/
 create table DialogItemConfig
 (
-   itemId               varchar(36),
+   itemId               varchar(36) not null,
    pId                  varchar(8),
    itemType             varchar(32),
    itemClick            varchar(48),
    itemName             varchar(128),
    itemValue            varchar(128),
-   itemOrder            int
+   itemOrder            int,
+   primary key (itemId)
 );
