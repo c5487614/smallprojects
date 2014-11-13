@@ -4,6 +4,7 @@ $(document).ready(function(){
 	initDatepicker('#tbox_planDevDate');
 	initDatepicker('#tbox_planAcceptDate');
 	$('#nav_firstPage').parent().removeClass('active');
+	$('#nav_item').removeClass('active');
 	$('#nav_project').addClass('active');
 	
 	var editFunc = function(config){
@@ -360,7 +361,7 @@ function createInterfaceDialog(){
 	var config = {
 			'dialogId' : 'modal_interface',
 			'ctrlId' : '',
-			'title' : '集成接口',
+			'title' : '集成控件',
 			'okBtnClick' : 'interfaceClick(this);',
 			'tabHeads' : [
               {'href':'SVSClientControl','tabName':'SVS客户端接口','headClass':'active'},
