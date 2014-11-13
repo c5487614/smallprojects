@@ -13,16 +13,17 @@
 					<a href="<%=request.getContextPath()%>/index.jsp" class="glyphicon glyphicon-list-alt dropdown-toggle" data-toggle="dropdown">项目 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 						<li><a href="<%=request.getContextPath()%>/project/addProject.jsp">新增</a></li>
-						<li><a href="index.jsp">查看</a></li>
+						<li><a href="<%=request.getContextPath()%>/project/index.jsp">查看</a></li>
 						<li class="divider"></li>
 						</ul>
 				</li>
 				<li id="nav_item" class="dropdown">
-					<a href="<%=request.getContextPath()%>/controls/viewItem.do?pId=1" class="glyphicon glyphicon-cog" data-toggle="dropdown">配置管理<span class="caret"></span></a>
+					<a href="<%=request.getContextPath()%>/controls/index.do" class="glyphicon glyphicon-cog" data-toggle="dropdown">配置管理<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-						<li><a href="<%=request.getContextPath()%>/controls/viewItem.do?pId=1">控件配置</a></li>
-						<li><a href="<%=request.getContextPath()%>/controls/viewItem.do?pid=2">接口配置</a></li>
+						<li><a href="<%=request.getContextPath()%>/controls/addControl.do">增加配置</a></li>
 						<li class="divider"></li>
+						<li><a href="<%=request.getContextPath()%>/controls/index.do?pId=1">控件配置</a></li>
+						<li><a href="<%=request.getContextPath()%>/controls/index.do?pid=2">接口配置</a></li>
 						</ul>
 				</li>
 				<!--  

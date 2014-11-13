@@ -82,5 +82,10 @@
 		</div>
 	</div>
 	</form>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="<%=request.getContextPath()%>/resources/jquery/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<%=request.getContextPath()%>/javascripts/project.js"></script>
 </body>
 </html>

@@ -1,0 +1,17 @@
+use hbcatestdb;
+
+drop table if exists DialogItemConfig;
+
+/*==============================================================*/
+/* Table: DialogItemConfig                                      */
+/*==============================================================*/
+create table DialogItemConfig
+(
+   itemId               varchar(36),
+   pId                  varchar(8),
+   itemType             varchar(32),
+   itemClick            varchar(48),
+   itemName             varchar(128),
+   itemValue            varchar(128),
+   itemOrder            int
+);
