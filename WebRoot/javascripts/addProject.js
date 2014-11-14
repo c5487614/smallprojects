@@ -663,5 +663,4 @@ function preStore(){
 		}
 	});
 	$('#hf_functions').val(functionsUsed);
-	
 }

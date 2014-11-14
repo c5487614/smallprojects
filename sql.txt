@@ -15,4 +15,7 @@ create table DialogItemConfig
    itemValue            varchar(128),
    itemOrder            int,
    primary key (itemId)
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_bin;

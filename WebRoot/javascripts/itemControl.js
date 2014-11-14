@@ -30,8 +30,9 @@ function initIndex(itemList){
 		getItemTpl({
 			projectId : obj.itemId,
 			items:[
-			    {value:'配置节点：' + text,itemPId:'label-primary glyphicon glyphicon-bookmark'},
-				{value:'配置名称：'+ obj.itemName}
+			    {value:'配置节点：' + text,itemStyle:'label-primary glyphicon glyphicon-bookmark'},
+				{value:'配置名称：'+ obj.itemName},
+				{value:'配置值：'+ obj.itemValue}
 			]
 		})
 	});

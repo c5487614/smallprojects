@@ -28,8 +28,8 @@
 	<jsp:include page="/header.jsp" />
 	<!-- top end -->
 	<form id="formItem" class="form-horizontal" role="form">
-	<input type="hidden" name="hf_isUpdate" id="hf_isUpdate" 
-    value="<c:out value="${isUpdate}"/>" />
+	<input type="hidden" name="hf_itemId" id="hf_itemId" 
+    value="<c:out value="${control.itemId}"/>" />
 	<fieldset>
 		<legend>控件配置信息</legend>
 		
@@ -42,7 +42,7 @@
     		<label for="tbox_itemType" class="col-sm-3 control-label">配置类型</label>
     		<div class="col-sm-7">
 		    	<select name="tbox_itemType" id="tbox_itemType" class="form-control">
-		    		<option value="功能">功能</option>
+		    		<option value="function">功能</option>
 		    		<option value="客户端方法">客户端方法</option>
 		    		<option value="服务端方法">服务端方法</option>
 		    		<option value="其他">其他</option>
@@ -82,10 +82,11 @@
 		</div>
 	</div>
 	</form>
+	<jsp:include page="/dialog.jsp" />
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<%=request.getContextPath()%>/resources/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<%=request.getContextPath()%>/javascripts/project.js"></script>
+    <script src="<%=request.getContextPath()%>/javascripts/addControl.js"></script>
 </body>
 </html>

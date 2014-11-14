@@ -18,7 +18,8 @@ public class ItemService implements IItemService{
 	@Override
 	public boolean delete(String id) {
 		// TODO Auto-generated method stub
-		return false;
+		itemMapper.deleteByPrimaryKey(id);
+		return true;
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class ItemService implements IItemService{
 	@Override
 	public List<Dialogitemconfig> selectAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return itemMapper.selectByExample(null);
 	}
 
 	@Override
@@ -39,7 +40,7 @@ public class ItemService implements IItemService{
 		// TODO Auto-generated method stub
 		
 //		itemMapper.selectByExample(example)
-		return null;
+		return itemMapper.selectByPrimaryKey(itemId);
 	}
 
 	@Override
@@ -51,7 +52,8 @@ public class ItemService implements IItemService{
 	@Override
 	public boolean update(Dialogitemconfig record) {
 		// TODO Auto-generated method stub
-		return false;
+		itemMapper.updateByPrimaryKey(record);
+		return true;
 	}
 
 }
